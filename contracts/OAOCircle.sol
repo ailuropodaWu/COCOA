@@ -42,10 +42,6 @@ contract OAOCircle is AIOracleCallbackReceiver {
     // uint256: modelID => (string: prompt => string: output)
     mapping(string => string) public prompts;
 
-    function inference(string calldata prompt) payable external  returns (string memory) {
-        this.calculateAIResult(prompt);
-        return this.getAIResult(prompt);
-    }
 
     function getAIResult(string calldata prompt) external view returns (string memory) {
         return prompts[prompt];
