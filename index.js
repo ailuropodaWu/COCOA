@@ -90,15 +90,15 @@ async function transfer(fromNet, toNet, fromAddr, toAddr, amount){
     const burnTxReceipt = await waitForTransaction(web3, burnTx.transactionHash);
     console.log('BurnTxReceipt: ', burnTxReceipt)
 
-    // STEP 3: Retrieve message bytes from logs
-    const transactionReceipt = await web3.eth.getTransactionReceipt(burnTx.transactionHash);
-    const eventTopic = web3.utils.keccak256('MessageSent(bytes)')
-    const log = transactionReceipt.logs.find((l) => l.topics[0] === eventTopic)
-    const messageBytes = web3.eth.abi.decodeParameters(['bytes'], log.data)[0]
-    const messageHash = web3.utils.keccak256(messageBytes);
+	// STEP 3: Retrieve message bytes from logs
+	const transactionReceipt = await web3.eth.getTransactionReceipt(burnTx.transactionHash);
+	const eventTopic = web3.utils.keccak256('MessageSent(bytes)')
+	const log = transactionReceipt.logs.find((l) => l.topics[0] === eventTopic)
+	const messageBytes = web3.eth.abi.decodeParameters(['bytes'], log.data)[0]
+	const messageHash = web3.utils.keccak256(messageBytes);
 
-    console.log(`MessageBytes: ${messageBytes}`)
-    console.log(`MessageHash: ${messageHash}`)
+	console.log(`MessageBytes: ${messageBytes}`)
+	console.log(`MessageHash: ${messageHash}`)
 
     // STEP 4: Fetch attestation signature
     let attestationResponse = {status: 'pending'};
@@ -108,8 +108,8 @@ async function transfer(fromNet, toNet, fromAddr, toAddr, amount){
         await new Promise(r => setTimeout(r, TO));
     }
 
-    const attestationSignature = attestationResponse.attestation;
-    console.log(`Signature: ${attestationSignature}`)
+	const attestationSignature = attestationResponse.attestation;
+	console.log(`Signature: ${attestationSignature}`)
 
     // STEP 5: Using the message bytes and signature recieve the funds on destination chain and address
     web3.setProvider(toNetRPC); // Connect web3 to OP testnet

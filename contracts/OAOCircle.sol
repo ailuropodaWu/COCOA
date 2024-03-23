@@ -16,11 +16,7 @@ contract OAOCircle is AIOracleCallbackReceiver {
         bytes callbackData
     );
 
-    event promptRequest(
-        uint256 requestId,
-        address sender, 
-        string prompt
-    );
+    event promptRequest(uint256 requestId, address sender, string prompt);
 
     struct AIOracleRequest {
         address sender;
@@ -48,23 +44,36 @@ contract OAOCircle is AIOracleCallbackReceiver {
     }
 
     // the callback function, only the AI Oracle can call this function
-    function aiOracleCallback(uint256 requestId, bytes calldata output, bytes calldata callbackData) external override onlyAIOracleCallback() {
+    function aiOracleCallback(
+        uint256 requestId,
+        bytes calldata output,
+        bytes calldata callbackData
+    ) external override onlyAIOracleCallback {
         // since we do not set the callbackData in this example, the callbackData should be empty
         AIOracleRequest storage request = requests[requestId];
         request.output = output;
         prompts[string(request.input)] = string(output);
-        emit promptsUpdated(requestId, string(request.input), string(output), callbackData);
+        emit promptsUpdated(
+            requestId,
+            string(request.input),
+            string(output),
+            callbackData
+        );
     }
 
     function estimateFee(uint256 modelId) public view returns (uint256) {
         return aiOracle.estimateFee(modelId, AIORACLE_CALLBACK_GAS_LIMIT);
     }
 
-    function calculateAIResult(string calldata prompt) payable external {
+    function calculateAIResult(string calldata prompt) external payable {
         bytes memory input = bytes(prompt);
         // we do not need to set the callbackData in this example
         uint256 requestId = aiOracle.requestCallback{value: msg.value}(
-            _modelID, input, address(this), AIORACLE_CALLBACK_GAS_LIMIT, ""
+            _modelID,
+            input,
+            address(this),
+            AIORACLE_CALLBACK_GAS_LIMIT,
+            ""
         );
         AIOracleRequest storage request = requests[requestId];
         request.input = input;

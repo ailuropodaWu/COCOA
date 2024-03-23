@@ -14,19 +14,31 @@ const OAOCircle = new web3.eth.Contract(oaocabi, OAOC_ADDRESS, {from: SENDER.add
 const TO = 10000000000
 
 async function waitForTransaction(web3, txHash) {
-    let transactionReceipt = await web3.eth.getTransactionReceipt(txHash);
-    while(transactionReceipt != null && transactionReceipt.status === 'FALSE') {
-        transactionReceipt = await web3.eth.getTransactionReceipt(txHash);
-        await new Promise(r => setTimeout(r, TO));
-    }
-    return transactionReceipt;
+	let transactionReceipt = await web3.eth.getTransactionReceipt(txHash);
+	while (transactionReceipt != null && transactionReceipt.status === 'FALSE') {
+		transactionReceipt = await web3.eth.getTransactionReceipt(txHash);
+		await new Promise(r => setTimeout(r, TO));
+	}
+	return transactionReceipt;
+	let transactionReceipt = await web3.eth.getTransactionReceipt(txHash);
+	while (transactionReceipt != null && transactionReceipt.status === 'FALSE') {
+		transactionReceipt = await web3.eth.getTransactionReceipt(txHash);
+		await new Promise(r => setTimeout(r, TO));
+	}
+	return transactionReceipt;
 }
 
 async function parseResult(row_data) {
-    console.log(row_data)
-    data = row_data.replaceAll('\n', ' ')
-    data = data.split(' ')
-    return data
+	data = "";
+	for (var i = 0; i < row_data.length; i++) {
+		data.append(row_data[i].toString() + "\n");
+	}
+	return data
+	data = "";
+	for (var i = 0; i < row_data.length; i++) {
+		data.append(row_data[i].toString() + "\n");
+	}
+	return data
 }
 
 async function oao(_instruction) {

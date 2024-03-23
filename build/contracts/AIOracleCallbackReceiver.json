@@ -73,7 +73,7 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.21+commit.d9974bed\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract IAIOracle\",\"name\":\"expected\",\"type\":\"address\"},{\"internalType\":\"contract IAIOracle\",\"name\":\"found\",\"type\":\"address\"}],\"name\":\"UnauthorizedCallbackSource\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"aiOracle\",\"outputs\":[{\"internalType\":\"contract IAIOracle\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"requestId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"output\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"callbackData\",\"type\":\"bytes\"}],\"name\":\"aiOracleCallback\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"requestId\",\"type\":\"uint256\"}],\"name\":\"isFinalized\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"aiOracleCallback(uint256,bytes,bytes)\":{\"details\":\"the callback function in OAO, should add the modifier onlyAIOracleCallback!\",\"params\":{\"callbackData\":\"user-defined data (The same as when the user call aiOracle.requestCallback)\",\"output\":\"AI model's output\",\"requestId\":\"Id for the request in OAO (unique per request)\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"constructor\":{\"notice\":\"Initialize the contract, binding it to a specified AIOracle contract\"}},\"notice\":\"A base contract for writing a AIOracle app\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/OAO/contracts/AIOracleCallbackReceiver.sol\":\"AIOracleCallbackReceiver\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/OAO/contracts/AIOracleCallbackReceiver.sol\":{\"keccak256\":\"0x62cefc5eb9c71d1971b8b24b9173d7a90f63a5083dfbf71434e2fa1566c490b0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://229d4374ad7bf25bd79f3e874bfff45fa01e3a31cba32258184beec495187d3a\",\"dweb:/ipfs/QmcmYxSNaimaV4VkqUEdhCPZKJUAvo2m3SzoU5WUKXpq6F\"]},\"project:/OAO/contracts/interfaces/IAIOracle.sol\":{\"keccak256\":\"0xecad1a46e53b5d2e86594a760cf6ab13a21e33924d91b6a551641fe3f5b86ad7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://680954c7a19bcaa6c7aa130f249d89e6f9fa46d850df1ec362d639a0d3841b57\",\"dweb:/ipfs/QmdCd3CfzWv58WZcxQNB4bzCjQwQ4TL5g6PGosrf3MKcFx\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.21+commit.d9974bed\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract IAIOracle\",\"name\":\"expected\",\"type\":\"address\"},{\"internalType\":\"contract IAIOracle\",\"name\":\"found\",\"type\":\"address\"}],\"name\":\"UnauthorizedCallbackSource\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"aiOracle\",\"outputs\":[{\"internalType\":\"contract IAIOracle\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"requestId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"output\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"callbackData\",\"type\":\"bytes\"}],\"name\":\"aiOracleCallback\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"requestId\",\"type\":\"uint256\"}],\"name\":\"isFinalized\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"aiOracleCallback(uint256,bytes,bytes)\":{\"details\":\"the callback function in OAO, should add the modifier onlyAIOracleCallback!\",\"params\":{\"callbackData\":\"user-defined data (The same as when the user call aiOracle.requestCallback)\",\"output\":\"AI model's output\",\"requestId\":\"Id for the request in OAO (unique per request)\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"constructor\":{\"notice\":\"Initialize the contract, binding it to a specified AIOracle contract\"}},\"notice\":\"A base contract for writing a AIOracle app\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/OAO/contracts/AIOracleCallbackReceiver.sol\":\"AIOracleCallbackReceiver\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/OAO/contracts/AIOracleCallbackReceiver.sol\":{\"keccak256\":\"0x9962254c36b4fc27651d0bb4a5f841444d12130f1d3847d11f2921480da03201\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://48184f856a4dae810eb1f3fb5e4a57668934a045711a109f2baee7bf7506cc23\",\"dweb:/ipfs/Qma8DeeQL7nChaW3dyvo4HCxKhvuVqvtrR6ztsTj93eabm\"]},\"project:/OAO/contracts/interfaces/IAIOracle.sol\":{\"keccak256\":\"0x3012af71d31d7de1316b22d5bb95fd0f6f8fc9dd9b2bdcc35944900047f9c074\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2c91fe224deda47657191ab7677d4264d45822cd0a5bc031aa928e1c41819796\",\"dweb:/ipfs/QmUSGFGP5UAjfYXYanxAAaMqfFYWY4NR6mKGHk9Y881aMV\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "immutableReferences": {},
@@ -81,8 +81,8 @@
   "deployedGeneratedSources": [],
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "// SampleContract.sol\r\n// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.9;\r\n\r\nimport \"./interfaces/IAIOracle.sol\";\r\n\r\n/// @notice A base contract for writing a AIOracle app\r\nabstract contract AIOracleCallbackReceiver {\r\n\r\n    // Address of the AIOracle contract\r\n    IAIOracle public immutable aiOracle;\r\n\r\n    // Invalid callback source error\r\n    error UnauthorizedCallbackSource(IAIOracle expected, IAIOracle found);\r\n\r\n    /// @notice Initialize the contract, binding it to a specified AIOracle contract\r\n    constructor(IAIOracle _aiOracle) {\r\n        aiOracle = _aiOracle;\r\n    }\r\n\r\n    /// @notice Verify this is a callback by the aiOracle contract \r\n    modifier onlyAIOracleCallback() {\r\n        IAIOracle foundRelayAddress = IAIOracle(msg.sender);\r\n        if (foundRelayAddress != aiOracle) {\r\n            revert UnauthorizedCallbackSource(aiOracle, foundRelayAddress);\r\n        }\r\n        _;\r\n    }\r\n\r\n    /**\r\n     * @dev the callback function in OAO, should add the modifier onlyAIOracleCallback!\r\n     * @param requestId Id for the request in OAO (unique per request)\r\n     * @param output AI model's output\r\n     * @param callbackData user-defined data (The same as when the user call aiOracle.requestCallback)\r\n     */\r\n    function aiOracleCallback(uint256 requestId, bytes calldata output, bytes calldata callbackData) external virtual;\r\n\r\n    function isFinalized(uint256 requestId) external view returns (bool) {\r\n        return aiOracle.isFinalized(requestId);\r\n    }\r\n}",
-  "sourcePath": "D:\\GitHub\\ethtaipei2024\\OAO\\contracts\\AIOracleCallbackReceiver.sol",
+  "source": "// SampleContract.sol\n// SPDX-License-Identifier: MIT\npragma solidity ^0.8.9;\n\nimport \"./interfaces/IAIOracle.sol\";\n\n/// @notice A base contract for writing a AIOracle app\nabstract contract AIOracleCallbackReceiver {\n\n    // Address of the AIOracle contract\n    IAIOracle public immutable aiOracle;\n\n    // Invalid callback source error\n    error UnauthorizedCallbackSource(IAIOracle expected, IAIOracle found);\n\n    /// @notice Initialize the contract, binding it to a specified AIOracle contract\n    constructor(IAIOracle _aiOracle) {\n        aiOracle = _aiOracle;\n    }\n\n    /// @notice Verify this is a callback by the aiOracle contract \n    modifier onlyAIOracleCallback() {\n        IAIOracle foundRelayAddress = IAIOracle(msg.sender);\n        if (foundRelayAddress != aiOracle) {\n            revert UnauthorizedCallbackSource(aiOracle, foundRelayAddress);\n        }\n        _;\n    }\n\n    /**\n     * @dev the callback function in OAO, should add the modifier onlyAIOracleCallback!\n     * @param requestId Id for the request in OAO (unique per request)\n     * @param output AI model's output\n     * @param callbackData user-defined data (The same as when the user call aiOracle.requestCallback)\n     */\n    function aiOracleCallback(uint256 requestId, bytes calldata output, bytes calldata callbackData) external virtual;\n\n    function isFinalized(uint256 requestId) external view returns (bool) {\n        return aiOracle.isFinalized(requestId);\n    }\n}",
+  "sourcePath": "/home/seanma/ethtaipei2024/OAO/contracts/AIOracleCallbackReceiver.sol",
   "ast": {
     "absolutePath": "project:/OAO/contracts/AIOracleCallbackReceiver.sol",
     "exportedSymbols": {
@@ -106,7 +106,7 @@
           ".9"
         ],
         "nodeType": "PragmaDirective",
-        "src": "56:23:1"
+        "src": "54:23:1"
       },
       {
         "absolutePath": "project:/OAO/contracts/interfaces/IAIOracle.sol",
@@ -116,7 +116,7 @@
         "nodeType": "ImportDirective",
         "scope": 1097,
         "sourceUnit": 1158,
-        "src": "83:36:1",
+        "src": "79:36:1",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -129,7 +129,7 @@
         "documentation": {
           "id": 1026,
           "nodeType": "StructuredDocumentation",
-          "src": "123:56:1",
+          "src": "117:55:1",
           "text": "@notice A base contract for writing a AIOracle app"
         },
         "fullyImplemented": false,
@@ -138,7 +138,7 @@
           1096
         ],
         "name": "AIOracleCallbackReceiver",
-        "nameLocation": "197:24:1",
+        "nameLocation": "190:24:1",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
@@ -147,10 +147,10 @@
             "id": 1029,
             "mutability": "immutable",
             "name": "aiOracle",
-            "nameLocation": "299:8:1",
+            "nameLocation": "289:8:1",
             "nodeType": "VariableDeclaration",
             "scope": 1096,
-            "src": "272:35:1",
+            "src": "262:35:1",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -164,14 +164,14 @@
                 "id": 1027,
                 "name": "IAIOracle",
                 "nameLocations": [
-                  "272:9:1"
+                  "262:9:1"
                 ],
                 "nodeType": "IdentifierPath",
                 "referencedDeclaration": 1157,
-                "src": "272:9:1"
+                "src": "262:9:1"
               },
               "referencedDeclaration": 1157,
-              "src": "272:9:1",
+              "src": "262:9:1",
               "typeDescriptions": {
                 "typeIdentifier": "t_contract$_IAIOracle_$1157",
                 "typeString": "contract IAIOracle"
@@ -183,7 +183,7 @@
             "errorSelector": "865c066e",
             "id": 1037,
             "name": "UnauthorizedCallbackSource",
-            "nameLocation": "360:26:1",
+            "nameLocation": "347:26:1",
             "nodeType": "ErrorDefinition",
             "parameters": {
               "id": 1036,
@@ -194,10 +194,10 @@
                   "id": 1032,
                   "mutability": "mutable",
                   "name": "expected",
-                  "nameLocation": "397:8:1",
+                  "nameLocation": "384:8:1",
                   "nodeType": "VariableDeclaration",
                   "scope": 1037,
-                  "src": "387:18:1",
+                  "src": "374:18:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -211,14 +211,14 @@
                       "id": 1030,
                       "name": "IAIOracle",
                       "nameLocations": [
-                        "387:9:1"
+                        "374:9:1"
                       ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1157,
-                      "src": "387:9:1"
+                      "src": "374:9:1"
                     },
                     "referencedDeclaration": 1157,
-                    "src": "387:9:1",
+                    "src": "374:9:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_contract$_IAIOracle_$1157",
                       "typeString": "contract IAIOracle"
@@ -231,10 +231,10 @@
                   "id": 1035,
                   "mutability": "mutable",
                   "name": "found",
-                  "nameLocation": "417:5:1",
+                  "nameLocation": "404:5:1",
                   "nodeType": "VariableDeclaration",
                   "scope": 1037,
-                  "src": "407:15:1",
+                  "src": "394:15:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -248,14 +248,14 @@
                       "id": 1033,
                       "name": "IAIOracle",
                       "nameLocations": [
-                        "407:9:1"
+                        "394:9:1"
                       ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1157,
-                      "src": "407:9:1"
+                      "src": "394:9:1"
                     },
                     "referencedDeclaration": 1157,
-                    "src": "407:9:1",
+                    "src": "394:9:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_contract$_IAIOracle_$1157",
                       "typeString": "contract IAIOracle"
@@ -264,15 +264,15 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "386:37:1"
+              "src": "373:37:1"
             },
-            "src": "354:70:1"
+            "src": "341:70:1"
           },
           {
             "body": {
               "id": 1048,
               "nodeType": "Block",
-              "src": "551:39:1",
+              "src": "535:37:1",
               "statements": [
                 {
                   "expression": {
@@ -287,7 +287,7 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 1029,
-                      "src": "562:8:1",
+                      "src": "545:8:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_contract$_IAIOracle_$1157",
                         "typeString": "contract IAIOracle"
@@ -301,13 +301,13 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 1041,
-                      "src": "573:9:1",
+                      "src": "556:9:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_contract$_IAIOracle_$1157",
                         "typeString": "contract IAIOracle"
                       }
                     },
-                    "src": "562:20:1",
+                    "src": "545:20:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_contract$_IAIOracle_$1157",
                       "typeString": "contract IAIOracle"
@@ -315,14 +315,14 @@
                   },
                   "id": 1047,
                   "nodeType": "ExpressionStatement",
-                  "src": "562:20:1"
+                  "src": "545:20:1"
                 }
               ]
             },
             "documentation": {
               "id": 1038,
               "nodeType": "StructuredDocumentation",
-              "src": "432:80:1",
+              "src": "417:80:1",
               "text": "@notice Initialize the contract, binding it to a specified AIOracle contract"
             },
             "id": 1049,
@@ -341,10 +341,10 @@
                   "id": 1041,
                   "mutability": "mutable",
                   "name": "_aiOracle",
-                  "nameLocation": "540:9:1",
+                  "nameLocation": "524:9:1",
                   "nodeType": "VariableDeclaration",
                   "scope": 1049,
-                  "src": "530:19:1",
+                  "src": "514:19:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -358,14 +358,14 @@
                       "id": 1039,
                       "name": "IAIOracle",
                       "nameLocations": [
-                        "530:9:1"
+                        "514:9:1"
                       ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1157,
-                      "src": "530:9:1"
+                      "src": "514:9:1"
                     },
                     "referencedDeclaration": 1157,
-                    "src": "530:9:1",
+                    "src": "514:9:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_contract$_IAIOracle_$1157",
                       "typeString": "contract IAIOracle"
@@ -374,16 +374,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "529:21:1"
+              "src": "513:21:1"
             },
             "returnParameters": {
               "id": 1043,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "551:0:1"
+              "src": "535:0:1"
             },
             "scope": 1096,
-            "src": "518:72:1",
+            "src": "502:70:1",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "internal"
@@ -392,7 +392,7 @@
             "body": {
               "id": 1071,
               "nodeType": "Block",
-              "src": "699:216:1",
+              "src": "678:210:1",
               "statements": [
                 {
                   "assignments": [
@@ -404,10 +404,10 @@
                       "id": 1054,
                       "mutability": "mutable",
                       "name": "foundRelayAddress",
-                      "nameLocation": "720:17:1",
+                      "nameLocation": "698:17:1",
                       "nodeType": "VariableDeclaration",
                       "scope": 1071,
-                      "src": "710:27:1",
+                      "src": "688:27:1",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -421,14 +421,14 @@
                           "id": 1052,
                           "name": "IAIOracle",
                           "nameLocations": [
-                            "710:9:1"
+                            "688:9:1"
                           ],
                           "nodeType": "IdentifierPath",
                           "referencedDeclaration": 1157,
-                          "src": "710:9:1"
+                          "src": "688:9:1"
                         },
                         "referencedDeclaration": 1157,
-                        "src": "710:9:1",
+                        "src": "688:9:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_contract$_IAIOracle_$1157",
                           "typeString": "contract IAIOracle"
@@ -447,7 +447,7 @@
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
                           "referencedDeclaration": 4294967281,
-                          "src": "750:3:1",
+                          "src": "728:3:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
                             "typeString": "msg"
@@ -458,10 +458,10 @@
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberLocation": "754:6:1",
+                        "memberLocation": "732:6:1",
                         "memberName": "sender",
                         "nodeType": "MemberAccess",
-                        "src": "750:10:1",
+                        "src": "728:10:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
@@ -480,7 +480,7 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 1157,
-                      "src": "740:9:1",
+                      "src": "718:9:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_type$_t_contract$_IAIOracle_$1157_$",
                         "typeString": "type(contract IAIOracle)"
@@ -495,7 +495,7 @@
                     "nameLocations": [],
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "740:21:1",
+                    "src": "718:21:1",
                     "tryCall": false,
                     "typeDescriptions": {
                       "typeIdentifier": "t_contract$_IAIOracle_$1157",
@@ -503,7 +503,7 @@
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "710:51:1"
+                  "src": "688:51:1"
                 },
                 {
                   "condition": {
@@ -522,7 +522,7 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 1054,
-                      "src": "776:17:1",
+                      "src": "753:17:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_contract$_IAIOracle_$1157",
                         "typeString": "contract IAIOracle"
@@ -536,13 +536,13 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 1029,
-                      "src": "797:8:1",
+                      "src": "774:8:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_contract$_IAIOracle_$1157",
                         "typeString": "contract IAIOracle"
                       }
                     },
-                    "src": "776:29:1",
+                    "src": "753:29:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -550,11 +550,11 @@
                   },
                   "id": 1069,
                   "nodeType": "IfStatement",
-                  "src": "772:124:1",
+                  "src": "749:122:1",
                   "trueBody": {
                     "id": 1068,
                     "nodeType": "Block",
-                    "src": "807:89:1",
+                    "src": "784:87:1",
                     "statements": [
                       {
                         "errorCall": {
@@ -565,7 +565,7 @@
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
                               "referencedDeclaration": 1029,
-                              "src": "856:8:1",
+                              "src": "832:8:1",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_contract$_IAIOracle_$1157",
                                 "typeString": "contract IAIOracle"
@@ -577,7 +577,7 @@
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
                               "referencedDeclaration": 1054,
-                              "src": "866:17:1",
+                              "src": "842:17:1",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_contract$_IAIOracle_$1157",
                                 "typeString": "contract IAIOracle"
@@ -600,7 +600,7 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 1037,
-                            "src": "829:26:1",
+                            "src": "805:26:1",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_error_pure$_t_contract$_IAIOracle_$1157_$_t_contract$_IAIOracle_$1157_$returns$__$",
                               "typeString": "function (contract IAIOracle,contract IAIOracle) pure"
@@ -615,7 +615,7 @@
                           "nameLocations": [],
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "829:55:1",
+                          "src": "805:55:1",
                           "tryCall": false,
                           "typeDescriptions": {
                             "typeIdentifier": "t_tuple$__$",
@@ -624,7 +624,7 @@
                         },
                         "id": 1067,
                         "nodeType": "RevertStatement",
-                        "src": "822:62:1"
+                        "src": "798:62:1"
                       }
                     ]
                   }
@@ -632,27 +632,27 @@
                 {
                   "id": 1070,
                   "nodeType": "PlaceholderStatement",
-                  "src": "906:1:1"
+                  "src": "880:1:1"
                 }
               ]
             },
             "documentation": {
               "id": 1050,
               "nodeType": "StructuredDocumentation",
-              "src": "598:63:1",
+              "src": "578:63:1",
               "text": "@notice Verify this is a callback by the aiOracle contract "
             },
             "id": 1072,
             "name": "onlyAIOracleCallback",
-            "nameLocation": "676:20:1",
+            "nameLocation": "655:20:1",
             "nodeType": "ModifierDefinition",
             "parameters": {
               "id": 1051,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "696:2:1"
+              "src": "675:2:1"
             },
-            "src": "667:248:1",
+            "src": "646:242:1",
             "virtual": false,
             "visibility": "internal"
           },
@@ -660,7 +660,7 @@
             "documentation": {
               "id": 1073,
               "nodeType": "StructuredDocumentation",
-              "src": "923:317:1",
+              "src": "894:312:1",
               "text": " @dev the callback function in OAO, should add the modifier onlyAIOracleCallback!\n @param requestId Id for the request in OAO (unique per request)\n @param output AI model's output\n @param callbackData user-defined data (The same as when the user call aiOracle.requestCallback)"
             },
             "functionSelector": "b0347814",
@@ -669,7 +669,7 @@
             "kind": "function",
             "modifiers": [],
             "name": "aiOracleCallback",
-            "nameLocation": "1255:16:1",
+            "nameLocation": "1220:16:1",
             "nodeType": "FunctionDefinition",
             "parameters": {
               "id": 1080,
@@ -680,10 +680,10 @@
                   "id": 1075,
                   "mutability": "mutable",
                   "name": "requestId",
-                  "nameLocation": "1280:9:1",
+                  "nameLocation": "1245:9:1",
                   "nodeType": "VariableDeclaration",
                   "scope": 1082,
-                  "src": "1272:17:1",
+                  "src": "1237:17:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -694,7 +694,7 @@
                     "id": 1074,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1272:7:1",
+                    "src": "1237:7:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -707,10 +707,10 @@
                   "id": 1077,
                   "mutability": "mutable",
                   "name": "output",
-                  "nameLocation": "1306:6:1",
+                  "nameLocation": "1271:6:1",
                   "nodeType": "VariableDeclaration",
                   "scope": 1082,
-                  "src": "1291:21:1",
+                  "src": "1256:21:1",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -721,7 +721,7 @@
                     "id": 1076,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1291:5:1",
+                    "src": "1256:5:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -734,10 +734,10 @@
                   "id": 1079,
                   "mutability": "mutable",
                   "name": "callbackData",
-                  "nameLocation": "1329:12:1",
+                  "nameLocation": "1294:12:1",
                   "nodeType": "VariableDeclaration",
                   "scope": 1082,
-                  "src": "1314:27:1",
+                  "src": "1279:27:1",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -748,7 +748,7 @@
                     "id": 1078,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1314:5:1",
+                    "src": "1279:5:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -757,16 +757,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1271:71:1"
+              "src": "1236:71:1"
             },
             "returnParameters": {
               "id": 1081,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1359:0:1"
+              "src": "1324:0:1"
             },
             "scope": 1096,
-            "src": "1246:114:1",
+            "src": "1211:114:1",
             "stateMutability": "nonpayable",
             "virtual": true,
             "visibility": "external"
@@ -775,7 +775,7 @@
             "body": {
               "id": 1094,
               "nodeType": "Block",
-              "src": "1437:57:1",
+              "src": "1400:55:1",
               "statements": [
                 {
                   "expression": {
@@ -786,7 +786,7 @@
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 1084,
-                        "src": "1476:9:1",
+                        "src": "1438:9:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -806,7 +806,7 @@
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 1029,
-                        "src": "1455:8:1",
+                        "src": "1417:8:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_contract$_IAIOracle_$1157",
                           "typeString": "contract IAIOracle"
@@ -817,11 +817,11 @@
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
-                      "memberLocation": "1464:11:1",
+                      "memberLocation": "1426:11:1",
                       "memberName": "isFinalized",
                       "nodeType": "MemberAccess",
                       "referencedDeclaration": 1156,
-                      "src": "1455:20:1",
+                      "src": "1417:20:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_view$_t_uint256_$returns$_t_bool_$",
                         "typeString": "function (uint256) view external returns (bool)"
@@ -836,7 +836,7 @@
                     "nameLocations": [],
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "1455:31:1",
+                    "src": "1417:31:1",
                     "tryCall": false,
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
@@ -846,7 +846,7 @@
                   "functionReturnParameters": 1088,
                   "id": 1093,
                   "nodeType": "Return",
-                  "src": "1448:38:1"
+                  "src": "1410:38:1"
                 }
               ]
             },
@@ -856,7 +856,7 @@
             "kind": "function",
             "modifiers": [],
             "name": "isFinalized",
-            "nameLocation": "1377:11:1",
+            "nameLocation": "1340:11:1",
             "nodeType": "FunctionDefinition",
             "parameters": {
               "id": 1085,
@@ -867,10 +867,10 @@
                   "id": 1084,
                   "mutability": "mutable",
                   "name": "requestId",
-                  "nameLocation": "1397:9:1",
+                  "nameLocation": "1360:9:1",
                   "nodeType": "VariableDeclaration",
                   "scope": 1095,
-                  "src": "1389:17:1",
+                  "src": "1352:17:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -881,7 +881,7 @@
                     "id": 1083,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1389:7:1",
+                    "src": "1352:7:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -890,7 +890,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1388:19:1"
+              "src": "1351:19:1"
             },
             "returnParameters": {
               "id": 1088,
@@ -904,7 +904,7 @@
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
                   "scope": 1095,
-                  "src": "1431:4:1",
+                  "src": "1394:4:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -915,7 +915,7 @@
                     "id": 1086,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1431:4:1",
+                    "src": "1394:4:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -924,24 +924,24 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1430:6:1"
+              "src": "1393:6:1"
             },
             "scope": 1096,
-            "src": "1368:126:1",
+            "src": "1331:124:1",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
         "scope": 1097,
-        "src": "179:1318:1",
+        "src": "172:1285:1",
         "usedErrors": [
           1037
         ],
         "usedEvents": []
       }
     ],
-    "src": "56:1441:1"
+    "src": "54:1403:1"
   },
   "compiler": {
     "name": "solc",
@@ -949,7 +949,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-03-23T03:09:42.082Z",
+  "updatedAt": "2024-03-23T18:18:34.012Z",
   "devdoc": {
     "kind": "dev",
     "methods": {
