@@ -5,58 +5,57 @@ const tokenMessengerAbi = require('./abis/cctp/TokenMessenger.json');
 const usdcAbi = require('./abis/Usdc.json');
 const messageTransmitterAbi = require('./abis/cctp/MessageTransmitter.json');
 
-const waitForTransaction = async(web3, txHash) => {
+const TO = 1000000 // Due to llama inference
+async function waitForTransaction(web3, txHash) {
     let transactionReceipt = await web3.eth.getTransactionReceipt(txHash);
     while(transactionReceipt != null && transactionReceipt.status === 'FALSE') {
         transactionReceipt = await web3.eth.getTransactionReceipt(txHash);
-        await new Promise(r => setTimeout(r, 4000));
+        await new Promise(r => setTimeout(r, TO));
     }
     return transactionReceipt;
 }
 
-const main = async() => {
-    const web3 = new Web3(process.env.ETH_TESTNET_RPC);
+async function main(fromNet, toNet, fromAddr, toAddr, amount){
+    fromNetRPC = ""
+    toNetRPC = ""
+    const to_DOMAIN = 0
+    const web3 = new Web3(fromNetRPC);
     
     // Add ETH private key used for signing transactions
-    const ethSigner = web3.eth.accounts.privateKeyToAccount(process.env.ETH_PRIVATE_KEY);
-    web3.eth.accounts.wallet.add(ethSigner);
+    const fromSigner = web3.eth.accounts.privateKeyToAccount(process.env.DEFAULT_PRIVATE_KEY);
+    web3.eth.accounts.wallet.add(fromSigner);
+    web3.eth.accounts.wallet.add(toSigner);
 
-    // Add OP private key used for signing transactions
-    const BASESigner = web3.eth.accounts.privateKeyToAccount(process.env.BASE_PRIVATE_KEY);
-    web3.eth.accounts.wallet.add(BASESigner);
 
     // Testnet Contract Addresses
-    const ETH_TOKEN_MESSENGER_CONTRACT_ADDRESS = "0x9f3B8679c73C2Fef8b59B4f3444d4e156fb70AA5";
-    const USDC_ETH_CONTRACT_ADDRESS = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
-    const BASE_MESSAGE_TRANSMITTER_CONTRACT_ADDRESS = '0x7865fAfC2db2093669d92c0F33AeEF291086BEFD';
+    const from_TOKEN_MESSENGER_CONTRACT_ADDRESS = "0x9f3B8679c73C2Fef8b59B4f3444d4e156fb70AA5";
+    const USDC_CONTRACT_ADDRESS = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
+    const to_MESSAGE_TRANSMITTER_CONTRACT_ADDRESS = '0x7865fAfC2db2093669d92c0F33AeEF291086BEFD';
 
     // initialize contracts using address and ABI
-    const ethTokenMessengerContract = new web3.eth.Contract(tokenMessengerAbi, ETH_TOKEN_MESSENGER_CONTRACT_ADDRESS, {from: ethSigner.address});
-    const usdcEthContract = new web3.eth.Contract(usdcAbi, USDC_ETH_CONTRACT_ADDRESS, {from: ethSigner.address});
-    const BASEMessageTransmitterContract = new web3.eth.Contract(messageTransmitterAbi, BASE_MESSAGE_TRANSMITTER_CONTRACT_ADDRESS, {from: BASESigner.address});
+    const fromTokenMessengerContract = new web3.eth.Contract(tokenMessengerAbi, from_TOKEN_MESSENGER_CONTRACT_ADDRESS, {from: fromAddr});
+    const usdcContract = new web3.eth.Contract(usdcAbi, USDC_CONTRACT_ADDRESS, {from: fromAddr});
+    const toMessageTransmitterContract = new web3.eth.Contract(messageTransmitterAbi, to_MESSAGE_TRANSMITTER_CONTRACT_ADDRESS, {from: toAddr});
 
     // OP destination address
-    const mintRecipient = process.env.RECIPIENT_ADDRESS;
-    // const destinationAddressInBytes32 = await ethMessageContract.methods.addressToBytes32(mintRecipient).call();
+    const toAddr = process.env.RECIPIENT_ADDRESS;
+    // const destinationAddressInBytes32 = await ethMessageContract.methods.addressToBytes32(toAddr).call();
     const abiCoder = new ethers.AbiCoder();
     const destinationAddressInBytes32 = abiCoder.encode(
         ["address"],
-        [mintRecipient]
+        [toAddr]
       );
-    const BASE_DESTINATION_DOMAIN = 6;
 
-    // Amount that will be transferred
-    const amount = process.env.AMOUNT;
 
     // STEP 1: Approve messenger contract to withdraw from our active eth address
-    const approveTxGas = await usdcEthContract.methods.approve(ETH_TOKEN_MESSENGER_CONTRACT_ADDRESS, amount).estimateGas()
-    const approveTx = await usdcEthContract.methods.approve(ETH_TOKEN_MESSENGER_CONTRACT_ADDRESS, amount).send({gas: approveTxGas})
+    const approveTxGas = await usdcContract.methods.approve(from_TOKEN_MESSENGER_CONTRACT_ADDRESS, amount).estimateGas()
+    const approveTx = await usdcContract.methods.approve(from_TOKEN_MESSENGER_CONTRACT_ADDRESS, amount).send({gas: approveTxGas})
     const approveTxReceipt = await waitForTransaction(web3, approveTx.transactionHash);
     console.log('ApproveTxReceipt: ', approveTxReceipt)
 
     // STEP 2: Burn USDC
-    const burnTxGas = await ethTokenMessengerContract.methods.depositForBurn(amount, BASE_DESTINATION_DOMAIN, destinationAddressInBytes32, USDC_ETH_CONTRACT_ADDRESS).estimateGas();
-    const burnTx = await ethTokenMessengerContract.methods.depositForBurn(amount, BASE_DESTINATION_DOMAIN, destinationAddressInBytes32, USDC_ETH_CONTRACT_ADDRESS).send({gas: burnTxGas});
+    const burnTxGas = await fromTokenMessengerContract.methods.depositForBurn(amount, to_DOMAIN, destinationAddressInBytes32, USDC_CONTRACT_ADDRESS).estimateGas();
+    const burnTx = await fromTokenMessengerContract.methods.depositForBurn(amount, to_DOMAIN, destinationAddressInBytes32, USDC_CONTRACT_ADDRESS).send({gas: burnTxGas});
     const burnTxReceipt = await waitForTransaction(web3, burnTx.transactionHash);
     console.log('BurnTxReceipt: ', burnTxReceipt)
 
@@ -75,16 +74,16 @@ const main = async() => {
     while(attestationResponse.status != 'complete') {
         const response = await fetch(`https://iris-api-sandbox.circle.com/v1/attestations/${messageHash}`);
         attestationResponse = await response.json()
-        await new Promise(r => setTimeout(r, 2000));
+        await new Promise(r => setTimeout(r, TO));
     }
 
     const attestationSignature = attestationResponse.attestation;
     console.log(`Signature: ${attestationSignature}`)
 
     // STEP 5: Using the message bytes and signature recieve the funds on destination chain and address
-    web3.setProvider(process.env.BASE_TESTNET_RPC); // Connect web3 to OP testnet
-    const receiveTxGas = await BASEMessageTransmitterContract.methods.receiveMessage(messageBytes, attestationSignature).estimateGas();
-    const receiveTx = await BASEMessageTransmitterContract.methods.receiveMessage(messageBytes, attestationSignature).send({gas: receiveTxGas});
+    web3.setProvider(toNetRPC); // Connect web3 to OP testnet
+    const receiveTxGas = await toMessageTransmitterContract.methods.receiveMessage(messageBytes, attestationSignature).estimateGas();
+    const receiveTx = await toMessageTransmitterContract.methods.receiveMessage(messageBytes, attestationSignature).send({gas: receiveTxGas});
     const receiveTxReceipt = await waitForTransaction(web3, receiveTx.transactionHash);
     console.log('ReceiveTxReceipt: ', receiveTxReceipt)
 };
