@@ -1,0 +1,194 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "D:\\GitHub\\ethtaipei2024\\contracts\\OAOCircle.sol": {
+      "lastModificationDate": 1711163962839,
+      "contentHash": "0e57a338bb11795d753318696517a18b",
+      "sourceName": "contracts/OAOCircle.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../OAO/contracts/interfaces/IAIOracle.sol",
+        "../OAO/contracts/AIOracle.sol",
+        "../OAO/contracts/AIOracleCallbackReceiver.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.9"
+      ],
+      "artifacts": [
+        "OAOCircle"
+      ]
+    },
+    "D:\\GitHub\\ethtaipei2024\\OAO\\contracts\\AIOracle.sol": {
+      "lastModificationDate": 1711157345665,
+      "contentHash": "99bf20ed3f564ab3b4964c577b7a2c2f",
+      "sourceName": "OAO/contracts/AIOracle.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./interfaces/IOpml.sol",
+        "./interfaces/IAIOracle.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.9"
+      ],
+      "artifacts": [
+        "AIOracle"
+      ]
+    },
+    "D:\\GitHub\\ethtaipei2024\\OAO\\contracts\\interfaces\\IAIOracle.sol": {
+      "lastModificationDate": 1711157345665,
+      "contentHash": "a0d08f5be419f45f2122f949b9daae20",
+      "sourceName": "OAO/contracts/interfaces/IAIOracle.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.9"
+      ],
+      "artifacts": [
+        "IAIOracle"
+      ]
+    },
+    "D:\\GitHub\\ethtaipei2024\\OAO\\contracts\\AIOracleCallbackReceiver.sol": {
+      "lastModificationDate": 1711157345665,
+      "contentHash": "b3879bc41280f966fbc5349222bc3be8",
+      "sourceName": "OAO/contracts/AIOracleCallbackReceiver.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./interfaces/IAIOracle.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.9"
+      ],
+      "artifacts": [
+        "AIOracleCallbackReceiver"
+      ]
+    },
+    "D:\\GitHub\\ethtaipei2024\\OAO\\contracts\\interfaces\\IOpml.sol": {
+      "lastModificationDate": 1711157345665,
+      "contentHash": "3cf9a62d1e48a644a35f406c11b8670d",
+      "sourceName": "OAO/contracts/interfaces/IOpml.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IOpml"
+      ]
+    }
+  }
+}

@@ -1,0 +1,977 @@
+{
+  "contractName": "AIOracleCallbackReceiver",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "contract IAIOracle",
+          "name": "expected",
+          "type": "address"
+        },
+        {
+          "internalType": "contract IAIOracle",
+          "name": "found",
+          "type": "address"
+        }
+      ],
+      "name": "UnauthorizedCallbackSource",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "aiOracle",
+      "outputs": [
+        {
+          "internalType": "contract IAIOracle",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "requestId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "output",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bytes",
+          "name": "callbackData",
+          "type": "bytes"
+        }
+      ],
+      "name": "aiOracleCallback",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "requestId",
+          "type": "uint256"
+        }
+      ],
+      "name": "isFinalized",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.21+commit.d9974bed\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract IAIOracle\",\"name\":\"expected\",\"type\":\"address\"},{\"internalType\":\"contract IAIOracle\",\"name\":\"found\",\"type\":\"address\"}],\"name\":\"UnauthorizedCallbackSource\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"aiOracle\",\"outputs\":[{\"internalType\":\"contract IAIOracle\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"requestId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"output\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"callbackData\",\"type\":\"bytes\"}],\"name\":\"aiOracleCallback\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"requestId\",\"type\":\"uint256\"}],\"name\":\"isFinalized\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"aiOracleCallback(uint256,bytes,bytes)\":{\"details\":\"the callback function in OAO, should add the modifier onlyAIOracleCallback!\",\"params\":{\"callbackData\":\"user-defined data (The same as when the user call aiOracle.requestCallback)\",\"output\":\"AI model's output\",\"requestId\":\"Id for the request in OAO (unique per request)\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"constructor\":{\"notice\":\"Initialize the contract, binding it to a specified AIOracle contract\"}},\"notice\":\"A base contract for writing a AIOracle app\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/OAO/contracts/AIOracleCallbackReceiver.sol\":\"AIOracleCallbackReceiver\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/OAO/contracts/AIOracleCallbackReceiver.sol\":{\"keccak256\":\"0x62cefc5eb9c71d1971b8b24b9173d7a90f63a5083dfbf71434e2fa1566c490b0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://229d4374ad7bf25bd79f3e874bfff45fa01e3a31cba32258184beec495187d3a\",\"dweb:/ipfs/QmcmYxSNaimaV4VkqUEdhCPZKJUAvo2m3SzoU5WUKXpq6F\"]},\"project:/OAO/contracts/interfaces/IAIOracle.sol\":{\"keccak256\":\"0xecad1a46e53b5d2e86594a760cf6ab13a21e33924d91b6a551641fe3f5b86ad7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://680954c7a19bcaa6c7aa130f249d89e6f9fa46d850df1ec362d639a0d3841b57\",\"dweb:/ipfs/QmdCd3CfzWv58WZcxQNB4bzCjQwQ4TL5g6PGosrf3MKcFx\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SampleContract.sol\r\n// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.9;\r\n\r\nimport \"./interfaces/IAIOracle.sol\";\r\n\r\n/// @notice A base contract for writing a AIOracle app\r\nabstract contract AIOracleCallbackReceiver {\r\n\r\n    // Address of the AIOracle contract\r\n    IAIOracle public immutable aiOracle;\r\n\r\n    // Invalid callback source error\r\n    error UnauthorizedCallbackSource(IAIOracle expected, IAIOracle found);\r\n\r\n    /// @notice Initialize the contract, binding it to a specified AIOracle contract\r\n    constructor(IAIOracle _aiOracle) {\r\n        aiOracle = _aiOracle;\r\n    }\r\n\r\n    /// @notice Verify this is a callback by the aiOracle contract \r\n    modifier onlyAIOracleCallback() {\r\n        IAIOracle foundRelayAddress = IAIOracle(msg.sender);\r\n        if (foundRelayAddress != aiOracle) {\r\n            revert UnauthorizedCallbackSource(aiOracle, foundRelayAddress);\r\n        }\r\n        _;\r\n    }\r\n\r\n    /**\r\n     * @dev the callback function in OAO, should add the modifier onlyAIOracleCallback!\r\n     * @param requestId Id for the request in OAO (unique per request)\r\n     * @param output AI model's output\r\n     * @param callbackData user-defined data (The same as when the user call aiOracle.requestCallback)\r\n     */\r\n    function aiOracleCallback(uint256 requestId, bytes calldata output, bytes calldata callbackData) external virtual;\r\n\r\n    function isFinalized(uint256 requestId) external view returns (bool) {\r\n        return aiOracle.isFinalized(requestId);\r\n    }\r\n}",
+  "sourcePath": "D:\\GitHub\\ethtaipei2024\\OAO\\contracts\\AIOracleCallbackReceiver.sol",
+  "ast": {
+    "absolutePath": "project:/OAO/contracts/AIOracleCallbackReceiver.sol",
+    "exportedSymbols": {
+      "AIOracleCallbackReceiver": [
+        1096
+      ],
+      "IAIOracle": [
+        1157
+      ]
+    },
+    "id": 1097,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1024,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".9"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "56:23:1"
+      },
+      {
+        "absolutePath": "project:/OAO/contracts/interfaces/IAIOracle.sol",
+        "file": "./interfaces/IAIOracle.sol",
+        "id": 1025,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 1097,
+        "sourceUnit": 1158,
+        "src": "83:36:1",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": true,
+        "baseContracts": [],
+        "canonicalName": "AIOracleCallbackReceiver",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 1026,
+          "nodeType": "StructuredDocumentation",
+          "src": "123:56:1",
+          "text": "@notice A base contract for writing a AIOracle app"
+        },
+        "fullyImplemented": false,
+        "id": 1096,
+        "linearizedBaseContracts": [
+          1096
+        ],
+        "name": "AIOracleCallbackReceiver",
+        "nameLocation": "197:24:1",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "functionSelector": "31b221cd",
+            "id": 1029,
+            "mutability": "immutable",
+            "name": "aiOracle",
+            "nameLocation": "299:8:1",
+            "nodeType": "VariableDeclaration",
+            "scope": 1096,
+            "src": "272:35:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_IAIOracle_$1157",
+              "typeString": "contract IAIOracle"
+            },
+            "typeName": {
+              "id": 1028,
+              "nodeType": "UserDefinedTypeName",
+              "pathNode": {
+                "id": 1027,
+                "name": "IAIOracle",
+                "nameLocations": [
+                  "272:9:1"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 1157,
+                "src": "272:9:1"
+              },
+              "referencedDeclaration": 1157,
+              "src": "272:9:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IAIOracle_$1157",
+                "typeString": "contract IAIOracle"
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "errorSelector": "865c066e",
+            "id": 1037,
+            "name": "UnauthorizedCallbackSource",
+            "nameLocation": "360:26:1",
+            "nodeType": "ErrorDefinition",
+            "parameters": {
+              "id": 1036,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1032,
+                  "mutability": "mutable",
+                  "name": "expected",
+                  "nameLocation": "397:8:1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1037,
+                  "src": "387:18:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IAIOracle_$1157",
+                    "typeString": "contract IAIOracle"
+                  },
+                  "typeName": {
+                    "id": 1031,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 1030,
+                      "name": "IAIOracle",
+                      "nameLocations": [
+                        "387:9:1"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 1157,
+                      "src": "387:9:1"
+                    },
+                    "referencedDeclaration": 1157,
+                    "src": "387:9:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IAIOracle_$1157",
+                      "typeString": "contract IAIOracle"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1035,
+                  "mutability": "mutable",
+                  "name": "found",
+                  "nameLocation": "417:5:1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1037,
+                  "src": "407:15:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IAIOracle_$1157",
+                    "typeString": "contract IAIOracle"
+                  },
+                  "typeName": {
+                    "id": 1034,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 1033,
+                      "name": "IAIOracle",
+                      "nameLocations": [
+                        "407:9:1"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 1157,
+                      "src": "407:9:1"
+                    },
+                    "referencedDeclaration": 1157,
+                    "src": "407:9:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IAIOracle_$1157",
+                      "typeString": "contract IAIOracle"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "386:37:1"
+            },
+            "src": "354:70:1"
+          },
+          {
+            "body": {
+              "id": 1048,
+              "nodeType": "Block",
+              "src": "551:39:1",
+              "statements": [
+                {
+                  "expression": {
+                    "id": 1046,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 1044,
+                      "name": "aiOracle",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1029,
+                      "src": "562:8:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IAIOracle_$1157",
+                        "typeString": "contract IAIOracle"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "id": 1045,
+                      "name": "_aiOracle",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1041,
+                      "src": "573:9:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IAIOracle_$1157",
+                        "typeString": "contract IAIOracle"
+                      }
+                    },
+                    "src": "562:20:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IAIOracle_$1157",
+                      "typeString": "contract IAIOracle"
+                    }
+                  },
+                  "id": 1047,
+                  "nodeType": "ExpressionStatement",
+                  "src": "562:20:1"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 1038,
+              "nodeType": "StructuredDocumentation",
+              "src": "432:80:1",
+              "text": "@notice Initialize the contract, binding it to a specified AIOracle contract"
+            },
+            "id": 1049,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1042,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1041,
+                  "mutability": "mutable",
+                  "name": "_aiOracle",
+                  "nameLocation": "540:9:1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1049,
+                  "src": "530:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IAIOracle_$1157",
+                    "typeString": "contract IAIOracle"
+                  },
+                  "typeName": {
+                    "id": 1040,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 1039,
+                      "name": "IAIOracle",
+                      "nameLocations": [
+                        "530:9:1"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 1157,
+                      "src": "530:9:1"
+                    },
+                    "referencedDeclaration": 1157,
+                    "src": "530:9:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IAIOracle_$1157",
+                      "typeString": "contract IAIOracle"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "529:21:1"
+            },
+            "returnParameters": {
+              "id": 1043,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "551:0:1"
+            },
+            "scope": 1096,
+            "src": "518:72:1",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 1071,
+              "nodeType": "Block",
+              "src": "699:216:1",
+              "statements": [
+                {
+                  "assignments": [
+                    1054
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 1054,
+                      "mutability": "mutable",
+                      "name": "foundRelayAddress",
+                      "nameLocation": "720:17:1",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 1071,
+                      "src": "710:27:1",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IAIOracle_$1157",
+                        "typeString": "contract IAIOracle"
+                      },
+                      "typeName": {
+                        "id": 1053,
+                        "nodeType": "UserDefinedTypeName",
+                        "pathNode": {
+                          "id": 1052,
+                          "name": "IAIOracle",
+                          "nameLocations": [
+                            "710:9:1"
+                          ],
+                          "nodeType": "IdentifierPath",
+                          "referencedDeclaration": 1157,
+                          "src": "710:9:1"
+                        },
+                        "referencedDeclaration": 1157,
+                        "src": "710:9:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IAIOracle_$1157",
+                          "typeString": "contract IAIOracle"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 1059,
+                  "initialValue": {
+                    "arguments": [
+                      {
+                        "expression": {
+                          "id": 1056,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 4294967281,
+                          "src": "750:3:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 1057,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "754:6:1",
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "src": "750:10:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 1055,
+                      "name": "IAIOracle",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1157,
+                      "src": "740:9:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_IAIOracle_$1157_$",
+                        "typeString": "type(contract IAIOracle)"
+                      }
+                    },
+                    "id": 1058,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "740:21:1",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IAIOracle_$1157",
+                      "typeString": "contract IAIOracle"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "710:51:1"
+                },
+                {
+                  "condition": {
+                    "commonType": {
+                      "typeIdentifier": "t_contract$_IAIOracle_$1157",
+                      "typeString": "contract IAIOracle"
+                    },
+                    "id": 1062,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "id": 1060,
+                      "name": "foundRelayAddress",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1054,
+                      "src": "776:17:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IAIOracle_$1157",
+                        "typeString": "contract IAIOracle"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "!=",
+                    "rightExpression": {
+                      "id": 1061,
+                      "name": "aiOracle",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1029,
+                      "src": "797:8:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IAIOracle_$1157",
+                        "typeString": "contract IAIOracle"
+                      }
+                    },
+                    "src": "776:29:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 1069,
+                  "nodeType": "IfStatement",
+                  "src": "772:124:1",
+                  "trueBody": {
+                    "id": 1068,
+                    "nodeType": "Block",
+                    "src": "807:89:1",
+                    "statements": [
+                      {
+                        "errorCall": {
+                          "arguments": [
+                            {
+                              "id": 1064,
+                              "name": "aiOracle",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 1029,
+                              "src": "856:8:1",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_IAIOracle_$1157",
+                                "typeString": "contract IAIOracle"
+                              }
+                            },
+                            {
+                              "id": 1065,
+                              "name": "foundRelayAddress",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 1054,
+                              "src": "866:17:1",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_IAIOracle_$1157",
+                                "typeString": "contract IAIOracle"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_contract$_IAIOracle_$1157",
+                                "typeString": "contract IAIOracle"
+                              },
+                              {
+                                "typeIdentifier": "t_contract$_IAIOracle_$1157",
+                                "typeString": "contract IAIOracle"
+                              }
+                            ],
+                            "id": 1063,
+                            "name": "UnauthorizedCallbackSource",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1037,
+                            "src": "829:26:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_error_pure$_t_contract$_IAIOracle_$1157_$_t_contract$_IAIOracle_$1157_$returns$__$",
+                              "typeString": "function (contract IAIOracle,contract IAIOracle) pure"
+                            }
+                          },
+                          "id": 1066,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "nameLocations": [],
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "829:55:1",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_tuple$__$",
+                            "typeString": "tuple()"
+                          }
+                        },
+                        "id": 1067,
+                        "nodeType": "RevertStatement",
+                        "src": "822:62:1"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": 1070,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "906:1:1"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 1050,
+              "nodeType": "StructuredDocumentation",
+              "src": "598:63:1",
+              "text": "@notice Verify this is a callback by the aiOracle contract "
+            },
+            "id": 1072,
+            "name": "onlyAIOracleCallback",
+            "nameLocation": "676:20:1",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 1051,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "696:2:1"
+            },
+            "src": "667:248:1",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "documentation": {
+              "id": 1073,
+              "nodeType": "StructuredDocumentation",
+              "src": "923:317:1",
+              "text": " @dev the callback function in OAO, should add the modifier onlyAIOracleCallback!\n @param requestId Id for the request in OAO (unique per request)\n @param output AI model's output\n @param callbackData user-defined data (The same as when the user call aiOracle.requestCallback)"
+            },
+            "functionSelector": "b0347814",
+            "id": 1082,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "aiOracleCallback",
+            "nameLocation": "1255:16:1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1080,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1075,
+                  "mutability": "mutable",
+                  "name": "requestId",
+                  "nameLocation": "1280:9:1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1082,
+                  "src": "1272:17:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1074,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1272:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1077,
+                  "mutability": "mutable",
+                  "name": "output",
+                  "nameLocation": "1306:6:1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1082,
+                  "src": "1291:21:1",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1076,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1291:5:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1079,
+                  "mutability": "mutable",
+                  "name": "callbackData",
+                  "nameLocation": "1329:12:1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1082,
+                  "src": "1314:27:1",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1078,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1314:5:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1271:71:1"
+            },
+            "returnParameters": {
+              "id": 1081,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1359:0:1"
+            },
+            "scope": 1096,
+            "src": "1246:114:1",
+            "stateMutability": "nonpayable",
+            "virtual": true,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 1094,
+              "nodeType": "Block",
+              "src": "1437:57:1",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 1091,
+                        "name": "requestId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1084,
+                        "src": "1476:9:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "id": 1089,
+                        "name": "aiOracle",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1029,
+                        "src": "1455:8:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IAIOracle_$1157",
+                          "typeString": "contract IAIOracle"
+                        }
+                      },
+                      "id": 1090,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1464:11:1",
+                      "memberName": "isFinalized",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1156,
+                      "src": "1455:20:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_view$_t_uint256_$returns$_t_bool_$",
+                        "typeString": "function (uint256) view external returns (bool)"
+                      }
+                    },
+                    "id": 1092,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1455:31:1",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 1088,
+                  "id": 1093,
+                  "nodeType": "Return",
+                  "src": "1448:38:1"
+                }
+              ]
+            },
+            "functionSelector": "33727c4d",
+            "id": 1095,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isFinalized",
+            "nameLocation": "1377:11:1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1085,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1084,
+                  "mutability": "mutable",
+                  "name": "requestId",
+                  "nameLocation": "1397:9:1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1095,
+                  "src": "1389:17:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1083,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1389:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1388:19:1"
+            },
+            "returnParameters": {
+              "id": 1088,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1087,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1095,
+                  "src": "1431:4:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1086,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1431:4:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1430:6:1"
+            },
+            "scope": 1096,
+            "src": "1368:126:1",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1097,
+        "src": "179:1318:1",
+        "usedErrors": [
+          1037
+        ],
+        "usedEvents": []
+      }
+    ],
+    "src": "56:1441:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.21+commit.d9974bed.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.16",
+  "updatedAt": "2024-03-23T03:09:42.082Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "aiOracleCallback(uint256,bytes,bytes)": {
+        "details": "the callback function in OAO, should add the modifier onlyAIOracleCallback!",
+        "params": {
+          "callbackData": "user-defined data (The same as when the user call aiOracle.requestCallback)",
+          "output": "AI model's output",
+          "requestId": "Id for the request in OAO (unique per request)"
+        }
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "constructor": {
+        "notice": "Initialize the contract, binding it to a specified AIOracle contract"
+      }
+    },
+    "notice": "A base contract for writing a AIOracle app",
+    "version": 1
+  }
+}

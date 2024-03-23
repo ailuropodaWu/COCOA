@@ -7,7 +7,7 @@ import "../OAO/contracts/AIOracle.sol";
 import "../OAO/contracts/AIOracleCallbackReceiver.sol";
 
 // this contract is for ai.hyperoracle.io websie
-contract Prompt is AIOracleCallbackReceiver {
+contract OAOCircle is AIOracleCallbackReceiver {
 
     event promptsUpdated(
         uint256 requestId,
@@ -41,6 +41,11 @@ contract Prompt is AIOracleCallbackReceiver {
 
     // uint256: modelID => (string: prompt => string: output)
     mapping(string => string) public prompts;
+
+    function inference(string calldata prompt) payable external  returns (string memory) {
+        this.calculateAIResult(prompt);
+        return this.getAIResult(prompt);
+    }
 
     function getAIResult(string calldata prompt) external view returns (string memory) {
         return prompts[prompt];

@@ -1,0 +1,980 @@
+{
+  "contractName": "IAIOracle",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "requestId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "modelId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "input",
+          "type": "bytes"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "callbackContract",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint64",
+          "name": "gasLimit",
+          "type": "uint64"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "callbackData",
+          "type": "bytes"
+        }
+      ],
+      "name": "AICallbackRequest",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "invoker",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "requestId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "output",
+          "type": "bytes"
+        }
+      ],
+      "name": "AICallbackResult",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "modelId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "input",
+          "type": "bytes"
+        },
+        {
+          "internalType": "address",
+          "name": "callbackContract",
+          "type": "address"
+        },
+        {
+          "internalType": "uint64",
+          "name": "gasLimit",
+          "type": "uint64"
+        },
+        {
+          "internalType": "bytes",
+          "name": "callbackData",
+          "type": "bytes"
+        }
+      ],
+      "name": "requestCallback",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "modelId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "gasLimit",
+          "type": "uint256"
+        }
+      ],
+      "name": "estimateFee",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "requestId",
+          "type": "uint256"
+        }
+      ],
+      "name": "isFinalized",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.21+commit.d9974bed\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"requestId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"modelId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"input\",\"type\":\"bytes\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"callbackContract\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"gasLimit\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"callbackData\",\"type\":\"bytes\"}],\"name\":\"AICallbackRequest\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"invoker\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"requestId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"output\",\"type\":\"bytes\"}],\"name\":\"AICallbackResult\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"modelId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"gasLimit\",\"type\":\"uint256\"}],\"name\":\"estimateFee\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"requestId\",\"type\":\"uint256\"}],\"name\":\"isFinalized\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"modelId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"input\",\"type\":\"bytes\"},{\"internalType\":\"address\",\"name\":\"callbackContract\",\"type\":\"address\"},{\"internalType\":\"uint64\",\"name\":\"gasLimit\",\"type\":\"uint64\"},{\"internalType\":\"bytes\",\"name\":\"callbackData\",\"type\":\"bytes\"}],\"name\":\"requestCallback\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"requestCallback(uint256,bytes,address,uint64,bytes)\":{\"params\":{\"callbackContract\":\"address of callback contract\",\"callbackData\":\"optional, user-defined data, will send back to the callback function\",\"gasLimit\":\"gas limitation of calling the callback function\",\"input\":\"input for AI model\",\"modelId\":\"ID for AI model\"},\"returns\":{\"_0\":\"requestID\"}}},\"version\":1},\"userdoc\":{\"events\":{\"AICallbackRequest(address,uint256,uint256,bytes,address,uint64,bytes)\":{\"notice\":\"Event emitted upon receiving a callback request through requestCallback.\"},\"AICallbackResult(address,uint256,bytes)\":{\"notice\":\"Event emitted when the result is uploaded or update.\"}},\"kind\":\"user\",\"methods\":{\"requestCallback(uint256,bytes,address,uint64,bytes)\":{\"notice\":\"initiate a request in OAO\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/OAO/contracts/interfaces/IAIOracle.sol\":\"IAIOracle\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/OAO/contracts/interfaces/IAIOracle.sol\":{\"keccak256\":\"0xecad1a46e53b5d2e86594a760cf6ab13a21e33924d91b6a551641fe3f5b86ad7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://680954c7a19bcaa6c7aa130f249d89e6f9fa46d850df1ec362d639a0d3841b57\",\"dweb:/ipfs/QmdCd3CfzWv58WZcxQNB4bzCjQwQ4TL5g6PGosrf3MKcFx\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SampleContract.sol\r\n// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.9;\r\n\r\ninterface IAIOracle {\r\n    /// @notice Event emitted upon receiving a callback request through requestCallback.\r\n    event AICallbackRequest(\r\n        address indexed account,\r\n        uint256 indexed requestId,\r\n        uint256 modelId,\r\n        bytes input,\r\n        address callbackContract,\r\n        uint64 gasLimit,\r\n        bytes callbackData\r\n    );\r\n\r\n    /// @notice Event emitted when the result is uploaded or update.\r\n    event AICallbackResult(\r\n        address indexed invoker,\r\n        uint256 indexed requestId,\r\n        bytes output\r\n    );\r\n\r\n    /**\r\n     * initiate a request in OAO\r\n     * @param modelId ID for AI model\r\n     * @param input input for AI model\r\n     * @param callbackContract address of callback contract\r\n     * @param gasLimit gas limitation of calling the callback function\r\n     * @param callbackData optional, user-defined data, will send back to the callback function\r\n     * @return requestID\r\n     */\r\n    function requestCallback(\r\n        uint256 modelId,\r\n        bytes memory input,\r\n        address callbackContract,\r\n        uint64 gasLimit,\r\n        bytes memory callbackData\r\n    ) external payable returns (uint256);\r\n\r\n    function estimateFee(uint256 modelId, uint256 gasLimit) external view returns (uint256);\r\n\r\n    function isFinalized(uint256 requestId) external view returns (bool);\r\n}",
+  "sourcePath": "D:\\GitHub\\ethtaipei2024\\OAO\\contracts\\interfaces\\IAIOracle.sol",
+  "ast": {
+    "absolutePath": "project:/OAO/contracts/interfaces/IAIOracle.sol",
+    "exportedSymbols": {
+      "IAIOracle": [
+        1157
+      ]
+    },
+    "id": 1158,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1098,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".9"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "56:23:2"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IAIOracle",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "id": 1157,
+        "linearizedBaseContracts": [
+          1157
+        ],
+        "name": "IAIOracle",
+        "nameLocation": "93:9:2",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": {
+              "id": 1099,
+              "nodeType": "StructuredDocumentation",
+              "src": "110:84:2",
+              "text": "@notice Event emitted upon receiving a callback request through requestCallback."
+            },
+            "eventSelector": "849aa5adc3bf6a75cb08afbf31d88d1528c274e5d84e3d4355d23d8e9ebd649b",
+            "id": 1115,
+            "name": "AICallbackRequest",
+            "nameLocation": "206:17:2",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1114,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1101,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "account",
+                  "nameLocation": "250:7:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1115,
+                  "src": "234:23:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1100,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "234:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1103,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "requestId",
+                  "nameLocation": "284:9:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1115,
+                  "src": "268:25:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1102,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "268:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1105,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "modelId",
+                  "nameLocation": "312:7:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1115,
+                  "src": "304:15:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1104,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "304:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1107,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "input",
+                  "nameLocation": "336:5:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1115,
+                  "src": "330:11:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1106,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "330:5:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1109,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "callbackContract",
+                  "nameLocation": "360:16:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1115,
+                  "src": "352:24:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1108,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "352:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1111,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "gasLimit",
+                  "nameLocation": "394:8:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1115,
+                  "src": "387:15:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 1110,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "387:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1113,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "callbackData",
+                  "nameLocation": "419:12:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1115,
+                  "src": "413:18:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1112,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "413:5:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "223:215:2"
+            },
+            "src": "200:239:2"
+          },
+          {
+            "anonymous": false,
+            "documentation": {
+              "id": 1116,
+              "nodeType": "StructuredDocumentation",
+              "src": "447:64:2",
+              "text": "@notice Event emitted when the result is uploaded or update."
+            },
+            "eventSelector": "ec2650f3d0548c85cc72c3ecef74483fd06aed05d55ea3ff47edc79cadafe044",
+            "id": 1124,
+            "name": "AICallbackResult",
+            "nameLocation": "523:16:2",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1123,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1118,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "invoker",
+                  "nameLocation": "566:7:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1124,
+                  "src": "550:23:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1117,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "550:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1120,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "requestId",
+                  "nameLocation": "600:9:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1124,
+                  "src": "584:25:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1119,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "584:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1122,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "output",
+                  "nameLocation": "626:6:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1124,
+                  "src": "620:12:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1121,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "620:5:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "539:100:2"
+            },
+            "src": "517:123:2"
+          },
+          {
+            "documentation": {
+              "id": 1125,
+              "nodeType": "StructuredDocumentation",
+              "src": "648:381:2",
+              "text": " initiate a request in OAO\n @param modelId ID for AI model\n @param input input for AI model\n @param callbackContract address of callback contract\n @param gasLimit gas limitation of calling the callback function\n @param callbackData optional, user-defined data, will send back to the callback function\n @return requestID"
+            },
+            "functionSelector": "5b953806",
+            "id": 1140,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "requestCallback",
+            "nameLocation": "1044:15:2",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1136,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1127,
+                  "mutability": "mutable",
+                  "name": "modelId",
+                  "nameLocation": "1078:7:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1140,
+                  "src": "1070:15:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1126,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1070:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1129,
+                  "mutability": "mutable",
+                  "name": "input",
+                  "nameLocation": "1109:5:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1140,
+                  "src": "1096:18:2",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1128,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1096:5:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1131,
+                  "mutability": "mutable",
+                  "name": "callbackContract",
+                  "nameLocation": "1133:16:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1140,
+                  "src": "1125:24:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1130,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1125:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1133,
+                  "mutability": "mutable",
+                  "name": "gasLimit",
+                  "nameLocation": "1167:8:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1140,
+                  "src": "1160:15:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 1132,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1160:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1135,
+                  "mutability": "mutable",
+                  "name": "callbackData",
+                  "nameLocation": "1199:12:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1140,
+                  "src": "1186:25:2",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1134,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1186:5:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1059:159:2"
+            },
+            "returnParameters": {
+              "id": 1139,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1138,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1140,
+                  "src": "1245:7:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1137,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1245:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1244:9:2"
+            },
+            "scope": 1157,
+            "src": "1035:219:2",
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "00e1d8d0",
+            "id": 1149,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "estimateFee",
+            "nameLocation": "1271:11:2",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1145,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1142,
+                  "mutability": "mutable",
+                  "name": "modelId",
+                  "nameLocation": "1291:7:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1149,
+                  "src": "1283:15:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1141,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1283:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1144,
+                  "mutability": "mutable",
+                  "name": "gasLimit",
+                  "nameLocation": "1308:8:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1149,
+                  "src": "1300:16:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1143,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1300:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1282:35:2"
+            },
+            "returnParameters": {
+              "id": 1148,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1147,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1149,
+                  "src": "1341:7:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1146,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1341:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1340:9:2"
+            },
+            "scope": 1157,
+            "src": "1262:88:2",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "33727c4d",
+            "id": 1156,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isFinalized",
+            "nameLocation": "1367:11:2",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1152,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1151,
+                  "mutability": "mutable",
+                  "name": "requestId",
+                  "nameLocation": "1387:9:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1156,
+                  "src": "1379:17:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1150,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1379:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1378:19:2"
+            },
+            "returnParameters": {
+              "id": 1155,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1154,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1156,
+                  "src": "1421:4:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1153,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1421:4:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1420:6:2"
+            },
+            "scope": 1157,
+            "src": "1358:69:2",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1158,
+        "src": "83:1347:2",
+        "usedErrors": [],
+        "usedEvents": [
+          1115,
+          1124
+        ]
+      }
+    ],
+    "src": "56:1374:2"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.21+commit.d9974bed.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.16",
+  "updatedAt": "2024-03-23T03:09:42.083Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "requestCallback(uint256,bytes,address,uint64,bytes)": {
+        "params": {
+          "callbackContract": "address of callback contract",
+          "callbackData": "optional, user-defined data, will send back to the callback function",
+          "gasLimit": "gas limitation of calling the callback function",
+          "input": "input for AI model",
+          "modelId": "ID for AI model"
+        },
+        "returns": {
+          "_0": "requestID"
+        }
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "events": {
+      "AICallbackRequest(address,uint256,uint256,bytes,address,uint64,bytes)": {
+        "notice": "Event emitted upon receiving a callback request through requestCallback."
+      },
+      "AICallbackResult(address,uint256,bytes)": {
+        "notice": "Event emitted when the result is uploaded or update."
+      }
+    },
+    "kind": "user",
+    "methods": {
+      "requestCallback(uint256,bytes,address,uint64,bytes)": {
+        "notice": "initiate a request in OAO"
+      }
+    },
+    "version": 1
+  }
+}
