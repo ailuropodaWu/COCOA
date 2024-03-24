@@ -4,7 +4,7 @@ const ethers = require("ethers");
 const concat = require("concat-stream");
 const network = require("./network.json");
 const netlist = ["sepolia", "avalanche", "op", "base"];
-const web3 = new Web3(process.env.FROM_TESTNET_RPC);
+const web3 = new Web3(process.env.DEFAULT_TESTNET_RPC);
 const oaocabi = require("./build/contracts/OAOCircle.json")["abi"];
 const tokenMessengerAbi = require("./abis/cctp/TokenMessenger.json");
 const usdcAbi = require("./abis/Usdc.json");
@@ -20,7 +20,7 @@ const OAOCircle = new web3.eth.Contract(oaocabi, OAOC_ADDRESS, {
   from: SENDER.address,
 });
 const TO = 3600 * 1000; // Due to LLama inference
-const MSG_VALUE = 0.07;
+const MSG_VALUE = 0.02;
 
 async function waitForTransaction(web3, txHash) {
   let transactionReceipt = await web3.eth.getTransactionReceipt(txHash);
