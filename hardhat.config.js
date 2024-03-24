@@ -14,7 +14,8 @@ const INFURA_API_KEY = "6b8bf353b4e04ee9a8531e887fca5e90";
 // To export your private key from Metamask, open Metamask and
 // go to Account Details > Export Private Key
 // Beware: NEVER put real Ether into testing accounts
-const SEPOLIA_PRIVATE_KEY = "0xf638c0738fad03238ee850f77371ffe9841a10e2f233994046076a37d99095a1";
+const SEPOLIA_PRIVATE_KEY =
+  "0xf638c0738fad03238ee850f77371ffe9841a10e2f233994046076a37d99095a1";
 module.exports = {
   solidity: "0.8.24",
   networks: {
@@ -24,4 +25,3 @@ module.exports = {
     },
   },
 };
-

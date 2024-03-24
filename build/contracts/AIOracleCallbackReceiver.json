@@ -86,12 +86,8 @@
   "ast": {
     "absolutePath": "project:/OAO/contracts/AIOracleCallbackReceiver.sol",
     "exportedSymbols": {
-      "AIOracleCallbackReceiver": [
-        1096
-      ],
-      "IAIOracle": [
-        1157
-      ]
+      "AIOracleCallbackReceiver": [1096],
+      "IAIOracle": [1157]
     },
     "id": 1097,
     "license": "MIT",
@@ -99,12 +95,7 @@
     "nodes": [
       {
         "id": 1024,
-        "literals": [
-          "solidity",
-          "^",
-          "0.8",
-          ".9"
-        ],
+        "literals": ["solidity", "^", "0.8", ".9"],
         "nodeType": "PragmaDirective",
         "src": "54:23:1"
       },
@@ -134,9 +125,7 @@
         },
         "fullyImplemented": false,
         "id": 1096,
-        "linearizedBaseContracts": [
-          1096
-        ],
+        "linearizedBaseContracts": [1096],
         "name": "AIOracleCallbackReceiver",
         "nameLocation": "190:24:1",
         "nodeType": "ContractDefinition",
@@ -163,9 +152,7 @@
               "pathNode": {
                 "id": 1027,
                 "name": "IAIOracle",
-                "nameLocations": [
-                  "262:9:1"
-                ],
+                "nameLocations": ["262:9:1"],
                 "nodeType": "IdentifierPath",
                 "referencedDeclaration": 1157,
                 "src": "262:9:1"
@@ -210,9 +197,7 @@
                     "pathNode": {
                       "id": 1030,
                       "name": "IAIOracle",
-                      "nameLocations": [
-                        "374:9:1"
-                      ],
+                      "nameLocations": ["374:9:1"],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1157,
                       "src": "374:9:1"
@@ -247,9 +232,7 @@
                     "pathNode": {
                       "id": 1033,
                       "name": "IAIOracle",
-                      "nameLocations": [
-                        "394:9:1"
-                      ],
+                      "nameLocations": ["394:9:1"],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1157,
                       "src": "394:9:1"
@@ -357,9 +340,7 @@
                     "pathNode": {
                       "id": 1039,
                       "name": "IAIOracle",
-                      "nameLocations": [
-                        "514:9:1"
-                      ],
+                      "nameLocations": ["514:9:1"],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1157,
                       "src": "514:9:1"
@@ -395,9 +376,7 @@
               "src": "678:210:1",
               "statements": [
                 {
-                  "assignments": [
-                    1054
-                  ],
+                  "assignments": [1054],
                   "declarations": [
                     {
                       "constant": false,
@@ -420,9 +399,7 @@
                         "pathNode": {
                           "id": 1052,
                           "name": "IAIOracle",
-                          "nameLocations": [
-                            "688:9:1"
-                          ],
+                          "nameLocations": ["688:9:1"],
                           "nodeType": "IdentifierPath",
                           "referencedDeclaration": 1157,
                           "src": "688:9:1"
@@ -935,9 +912,7 @@
         ],
         "scope": 1097,
         "src": "172:1285:1",
-        "usedErrors": [
-          1037
-        ],
+        "usedErrors": [1037],
         "usedEvents": []
       }
     ],

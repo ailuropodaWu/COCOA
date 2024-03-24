@@ -19661,21 +19661,11 @@
   "ast": {
     "absolutePath": "project:/contracts/OAOCircle.sol",
     "exportedSymbols": {
-      "AIOracle": [
-        1022
-      ],
-      "AIOracleCallbackReceiver": [
-        1096
-      ],
-      "IAIOracle": [
-        1157
-      ],
-      "IOpml": [
-        1231
-      ],
-      "Prompt": [
-        1446
-      ]
+      "AIOracle": [1022],
+      "AIOracleCallbackReceiver": [1096],
+      "IAIOracle": [1157],
+      "IOpml": [1231],
+      "Prompt": [1446]
     },
     "id": 1447,
     "license": "MIT",
@@ -19683,12 +19673,7 @@
     "nodes": [
       {
         "id": 1233,
-        "literals": [
-          "solidity",
-          "^",
-          "0.8",
-          ".9"
-        ],
+        "literals": ["solidity", "^", "0.8", ".9"],
         "nodeType": "PragmaDirective",
         "src": "56:23:4"
       },
@@ -19735,9 +19720,7 @@
             "baseName": {
               "id": 1237,
               "name": "AIOracleCallbackReceiver",
-              "nameLocations": [
-                "305:24:4"
-              ],
+              "nameLocations": ["305:24:4"],
               "nodeType": "IdentifierPath",
               "referencedDeclaration": 1096,
               "src": "305:24:4"
@@ -19752,10 +19735,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 1446,
-        "linearizedBaseContracts": [
-          1446,
-          1096
-        ],
+        "linearizedBaseContracts": [1446, 1096],
         "name": "Prompt",
         "nameLocation": "295:6:4",
         "nodeType": "ContractDefinition",
@@ -20170,9 +20150,7 @@
                 "pathNode": {
                   "id": 1268,
                   "name": "AIOracleRequest",
-                  "nameLocations": [
-                    "785:15:4"
-                  ],
+                  "nameLocations": ["785:15:4"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 1263,
                   "src": "785:15:4"
@@ -20224,9 +20202,7 @@
                 "modifierName": {
                   "id": 1277,
                   "name": "AIOracleCallbackReceiver",
-                  "nameLocations": [
-                    "937:24:4"
-                  ],
+                  "nameLocations": ["937:24:4"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 1096,
                   "src": "937:24:4"
@@ -20263,9 +20239,7 @@
                     "pathNode": {
                       "id": 1273,
                       "name": "IAIOracle",
-                      "nameLocations": [
-                        "916:9:4"
-                      ],
+                      "nameLocations": ["916:9:4"],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1157,
                       "src": "916:9:4"
@@ -20760,18 +20734,14 @@
             "visibility": "external"
           },
           {
-            "baseFunctions": [
-              1082
-            ],
+            "baseFunctions": [1082],
             "body": {
               "id": 1373,
               "nodeType": "Block",
               "src": "1850:357:4",
               "statements": [
                 {
-                  "assignments": [
-                    1335
-                  ],
+                  "assignments": [1335],
                   "declarations": [
                     {
                       "constant": false,
@@ -20794,9 +20764,7 @@
                         "pathNode": {
                           "id": 1333,
                           "name": "AIOracleRequest",
-                          "nameLocations": [
-                            "1960:15:4"
-                          ],
+                          "nameLocations": ["1960:15:4"],
                           "nodeType": "IdentifierPath",
                           "referencedDeclaration": 1263,
                           "src": "1960:15:4"
@@ -21307,9 +21275,7 @@
                 "modifierName": {
                   "id": 1330,
                   "name": "onlyAIOracleCallback",
-                  "nameLocations": [
-                    "1827:20:4"
-                  ],
+                  "nameLocations": ["1827:20:4"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 1072,
                   "src": "1827:20:4"
@@ -21611,9 +21577,7 @@
               "src": "2443:476:4",
               "statements": [
                 {
-                  "assignments": [
-                    1394
-                  ],
+                  "assignments": [1394],
                   "declarations": [
                     {
                       "constant": false,
@@ -21705,9 +21669,7 @@
                   "src": "2454:34:4"
                 },
                 {
-                  "assignments": [
-                    1401
-                  ],
+                  "assignments": [1401],
                   "declarations": [
                     {
                       "constant": false,
@@ -21928,9 +21890,7 @@
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
-                      "names": [
-                        "value"
-                      ],
+                      "names": ["value"],
                       "nodeType": "FunctionCallOptions",
                       "options": [
                         {
@@ -21987,9 +21947,7 @@
                   "src": "2566:151:4"
                 },
                 {
-                  "assignments": [
-                    1419
-                  ],
+                  "assignments": [1419],
                   "declarations": [
                     {
                       "constant": false,
@@ -22012,9 +21970,7 @@
                         "pathNode": {
                           "id": 1417,
                           "name": "AIOracleRequest",
-                          "nameLocations": [
-                            "2728:15:4"
-                          ],
+                          "nameLocations": ["2728:15:4"],
                           "nodeType": "IdentifierPath",
                           "referencedDeclaration": 1263,
                           "src": "2728:15:4"
@@ -22363,13 +22319,8 @@
         ],
         "scope": 1447,
         "src": "286:2636:4",
-        "usedErrors": [
-          1037
-        ],
-        "usedEvents": [
-          1248,
-          1256
-        ]
+        "usedErrors": [1037],
+        "usedEvents": [1248, 1256]
       }
     ],
     "src": "56:2868:4"

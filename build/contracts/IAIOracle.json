@@ -171,9 +171,7 @@
   "ast": {
     "absolutePath": "project:/OAO/contracts/interfaces/IAIOracle.sol",
     "exportedSymbols": {
-      "IAIOracle": [
-        1157
-      ]
+      "IAIOracle": [1157]
     },
     "id": 1158,
     "license": "MIT",
@@ -181,12 +179,7 @@
     "nodes": [
       {
         "id": 1098,
-        "literals": [
-          "solidity",
-          "^",
-          "0.8",
-          ".9"
-        ],
+        "literals": ["solidity", "^", "0.8", ".9"],
         "nodeType": "PragmaDirective",
         "src": "54:23:2"
       },
@@ -198,9 +191,7 @@
         "contractKind": "interface",
         "fullyImplemented": false,
         "id": 1157,
-        "linearizedBaseContracts": [
-          1157
-        ],
+        "linearizedBaseContracts": [1157],
         "name": "IAIOracle",
         "nameLocation": "89:9:2",
         "nodeType": "ContractDefinition",
@@ -927,10 +918,7 @@
         "scope": 1158,
         "src": "79:1308:2",
         "usedErrors": [],
-        "usedEvents": [
-          1115,
-          1124
-        ]
+        "usedEvents": [1115, 1124]
       }
     ],
     "src": "54:1333:2"

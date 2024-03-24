@@ -201,9 +201,7 @@
   "ast": {
     "absolutePath": "project:/OAO/contracts/interfaces/IOpml.sol",
     "exportedSymbols": {
-      "IOpml": [
-        1231
-      ]
+      "IOpml": [1231]
     },
     "id": 1232,
     "license": "MIT",
@@ -211,12 +209,7 @@
     "nodes": [
       {
         "id": 1159,
-        "literals": [
-          "solidity",
-          "^",
-          "0.8",
-          ".0"
-        ],
+        "literals": ["solidity", "^", "0.8", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:23:3"
       },
@@ -228,9 +221,7 @@
         "contractKind": "interface",
         "fullyImplemented": false,
         "id": 1231,
-        "linearizedBaseContracts": [
-          1231
-        ],
+        "linearizedBaseContracts": [1231],
         "name": "IOpml",
         "nameLocation": "67:5:3",
         "nodeType": "ContractDefinition",

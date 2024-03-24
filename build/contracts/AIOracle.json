@@ -25947,15 +25947,9 @@
   "ast": {
     "absolutePath": "project:/OAO/contracts/AIOracle.sol",
     "exportedSymbols": {
-      "AIOracle": [
-        1022
-      ],
-      "IAIOracle": [
-        1157
-      ],
-      "IOpml": [
-        1231
-      ]
+      "AIOracle": [1022],
+      "IAIOracle": [1157],
+      "IOpml": [1231]
     },
     "id": 1023,
     "license": "MIT",
@@ -25963,12 +25957,7 @@
     "nodes": [
       {
         "id": 1,
-        "literals": [
-          "solidity",
-          "^",
-          "0.8",
-          ".9"
-        ],
+        "literals": ["solidity", "^", "0.8", ".9"],
         "nodeType": "PragmaDirective",
         "src": "54:23:0"
       },
@@ -26003,9 +25992,7 @@
             "baseName": {
               "id": 4,
               "name": "IAIOracle",
-              "nameLocations": [
-                "171:9:0"
-              ],
+              "nameLocations": ["171:9:0"],
               "nodeType": "IdentifierPath",
               "referencedDeclaration": 1157,
               "src": "171:9:0"
@@ -26020,10 +26007,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 1022,
-        "linearizedBaseContracts": [
-          1022,
-          1157
-        ],
+        "linearizedBaseContracts": [1022, 1157],
         "name": "AIOracle",
         "nameLocation": "159:8:0",
         "nodeType": "ContractDefinition",
@@ -26134,9 +26118,7 @@
                     "pathNode": {
                       "id": 7,
                       "name": "IOpml",
-                      "nameLocations": [
-                        "225:5:0"
-                      ],
+                      "nameLocations": ["225:5:0"],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1231,
                       "src": "225:5:0"
@@ -26574,10 +26556,7 @@
                       "id": 45,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "694:7:0",
                       "typeDescriptions": {
@@ -26742,10 +26721,7 @@
                       "id": 58,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "797:7:0",
                       "typeDescriptions": {
@@ -27092,9 +27068,7 @@
                 "pathNode": {
                   "id": 90,
                   "name": "AICallbackRequestData",
-                  "nameLocations": [
-                    "1208:21:0"
-                  ],
+                  "nameLocations": ["1208:21:0"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 88,
                   "src": "1208:21:0"
@@ -27378,9 +27352,7 @@
                 "pathNode": {
                   "id": 112,
                   "name": "ModelData",
-                  "nameLocations": [
-                    "1531:9:0"
-                  ],
+                  "nameLocations": ["1531:9:0"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 110,
                   "src": "1531:9:0"
@@ -27601,9 +27573,7 @@
                 "modifierName": {
                   "id": 128,
                   "name": "onlyOwner",
-                  "nameLocations": [
-                    "1711:9:0"
-                  ],
+                  "nameLocations": ["1711:9:0"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 56,
                   "src": "1711:9:0"
@@ -27753,9 +27723,7 @@
                 "modifierName": {
                   "id": 142,
                   "name": "onlyOwner",
-                  "nameLocations": [
-                    "1826:9:0"
-                  ],
+                  "nameLocations": ["1826:9:0"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 56,
                   "src": "1826:9:0"
@@ -27906,10 +27874,7 @@
                       "id": 156,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "1946:7:0",
                       "typeDescriptions": {
@@ -28064,10 +28029,7 @@
                       "id": 170,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "2073:7:0",
                       "typeDescriptions": {
@@ -28210,9 +28172,7 @@
                 "modifierName": {
                   "id": 181,
                   "name": "onlyOwner",
-                  "nameLocations": [
-                    "2222:9:0"
-                  ],
+                  "nameLocations": ["2222:9:0"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 56,
                   "src": "2222:9:0"
@@ -28293,9 +28253,7 @@
                 "modifierName": {
                   "id": 191,
                   "name": "onlyOwner",
-                  "nameLocations": [
-                    "2333:9:0"
-                  ],
+                  "nameLocations": ["2333:9:0"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 56,
                   "src": "2333:9:0"
@@ -28505,9 +28463,7 @@
                     "src": "2755:356:0",
                     "statements": [
                       {
-                        "assignments": [
-                          235
-                        ],
+                        "assignments": [235],
                         "declarations": [
                           {
                             "constant": false,
@@ -28891,9 +28847,7 @@
                   },
                   "id": 263,
                   "initializationExpression": {
-                    "assignments": [
-                      224
-                    ],
+                    "assignments": [224],
                     "declarations": [
                       {
                         "constant": false,
@@ -28991,9 +28945,7 @@
                 "modifierName": {
                   "id": 211,
                   "name": "onlyOwner",
-                  "nameLocations": [
-                    "2599:9:0"
-                  ],
+                  "nameLocations": ["2599:9:0"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 56,
                   "src": "2599:9:0"
@@ -29021,9 +28973,7 @@
                 "modifierName": {
                   "id": 213,
                   "name": "ifModelExists",
-                  "nameLocations": [
-                    "2609:13:0"
-                  ],
+                  "nameLocations": ["2609:13:0"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 179,
                   "src": "2609:13:0"
@@ -29088,9 +29038,7 @@
               "src": "3162:361:0",
               "statements": [
                 {
-                  "assignments": [
-                    271
-                  ],
+                  "assignments": [271],
                   "declarations": [
                     {
                       "constant": false,
@@ -29131,9 +29079,7 @@
                     "src": "3245:151:0",
                     "statements": [
                       {
-                        "assignments": [
-                          285
-                        ],
+                        "assignments": [285],
                         "declarations": [
                           {
                             "constant": false,
@@ -29205,9 +29151,7 @@
                         "src": "3259:24:0"
                       },
                       {
-                        "assignments": [
-                          292
-                        ],
+                        "assignments": [292],
                         "declarations": [
                           {
                             "constant": false,
@@ -29230,9 +29174,7 @@
                               "pathNode": {
                                 "id": 290,
                                 "name": "ModelData",
-                                "nameLocations": [
-                                  "3297:9:0"
-                                ],
+                                "nameLocations": ["3297:9:0"],
                                 "nodeType": "IdentifierPath",
                                 "referencedDeclaration": 110,
                                 "src": "3297:9:0"
@@ -29408,9 +29350,7 @@
                   },
                   "id": 303,
                   "initializationExpression": {
-                    "assignments": [
-                      274
-                    ],
+                    "assignments": [274],
                     "declarations": [
                       {
                         "constant": false,
@@ -29496,9 +29436,7 @@
                   "src": "3202:194:0"
                 },
                 {
-                  "assignments": [
-                    305
-                  ],
+                  "assignments": [305],
                   "declarations": [
                     {
                       "constant": false,
@@ -29777,9 +29715,7 @@
                 "modifierName": {
                   "id": 267,
                   "name": "onlyOwner",
-                  "nameLocations": [
-                    "3152:9:0"
-                  ],
+                  "nameLocations": ["3152:9:0"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 56,
                   "src": "3152:9:0"
@@ -29816,9 +29752,7 @@
               "src": "3623:84:0",
               "statements": [
                 {
-                  "assignments": [
-                    338
-                  ],
+                  "assignments": [338],
                   "declarations": [
                     {
                       "constant": false,
@@ -29841,9 +29775,7 @@
                         "pathNode": {
                           "id": 336,
                           "name": "ModelData",
-                          "nameLocations": [
-                            "3633:9:0"
-                          ],
+                          "nameLocations": ["3633:9:0"],
                           "nodeType": "IdentifierPath",
                           "referencedDeclaration": 110,
                           "src": "3633:9:0"
@@ -29971,9 +29903,7 @@
                 "modifierName": {
                   "id": 330,
                   "name": "onlyOwner",
-                  "nameLocations": [
-                    "3590:9:0"
-                  ],
+                  "nameLocations": ["3590:9:0"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 56,
                   "src": "3590:9:0"
@@ -30001,9 +29931,7 @@
                 "modifierName": {
                   "id": 332,
                   "name": "ifModelExists",
-                  "nameLocations": [
-                    "3600:13:0"
-                  ],
+                  "nameLocations": ["3600:13:0"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 179,
                   "src": "3600:13:0"
@@ -30095,9 +30023,7 @@
               "src": "3816:93:0",
               "statements": [
                 {
-                  "assignments": [
-                    364
-                  ],
+                  "assignments": [364],
                   "declarations": [
                     {
                       "constant": false,
@@ -30120,9 +30046,7 @@
                         "pathNode": {
                           "id": 362,
                           "name": "ModelData",
-                          "nameLocations": [
-                            "3826:9:0"
-                          ],
+                          "nameLocations": ["3826:9:0"],
                           "nodeType": "IdentifierPath",
                           "referencedDeclaration": 110,
                           "src": "3826:9:0"
@@ -30250,9 +30174,7 @@
                 "modifierName": {
                   "id": 356,
                   "name": "onlyOwner",
-                  "nameLocations": [
-                    "3783:9:0"
-                  ],
+                  "nameLocations": ["3783:9:0"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 56,
                   "src": "3783:9:0"
@@ -30280,9 +30202,7 @@
                 "modifierName": {
                   "id": 358,
                   "name": "ifModelExists",
-                  "nameLocations": [
-                    "3793:13:0"
-                  ],
+                  "nameLocations": ["3793:13:0"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 179,
                   "src": "3793:13:0"
@@ -30454,10 +30374,7 @@
                       "id": 388,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "4048:7:0",
                       "typeDescriptions": {
@@ -30486,9 +30403,7 @@
                   "src": "4048:65:0"
                 },
                 {
-                  "assignments": [
-                    397
-                  ],
+                  "assignments": [397],
                   "declarations": [
                     {
                       "constant": false,
@@ -30511,9 +30426,7 @@
                         "pathNode": {
                           "id": 395,
                           "name": "ModelData",
-                          "nameLocations": [
-                            "4123:9:0"
-                          ],
+                          "nameLocations": ["4123:9:0"],
                           "nodeType": "IdentifierPath",
                           "referencedDeclaration": 110,
                           "src": "4123:9:0"
@@ -30641,9 +30554,7 @@
                 "modifierName": {
                   "id": 382,
                   "name": "onlyOwner",
-                  "nameLocations": [
-                    "4005:9:0"
-                  ],
+                  "nameLocations": ["4005:9:0"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 56,
                   "src": "4005:9:0"
@@ -30671,9 +30582,7 @@
                 "modifierName": {
                   "id": 384,
                   "name": "ifModelExists",
-                  "nameLocations": [
-                    "4015:13:0"
-                  ],
+                  "nameLocations": ["4015:13:0"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 179,
                   "src": "4015:13:0"
@@ -30765,9 +30674,7 @@
               "src": "4331:79:0",
               "statements": [
                 {
-                  "assignments": [
-                    422
-                  ],
+                  "assignments": [422],
                   "declarations": [
                     {
                       "constant": false,
@@ -30790,9 +30697,7 @@
                         "pathNode": {
                           "id": 420,
                           "name": "ModelData",
-                          "nameLocations": [
-                            "4341:9:0"
-                          ],
+                          "nameLocations": ["4341:9:0"],
                           "nodeType": "IdentifierPath",
                           "referencedDeclaration": 110,
                           "src": "4341:9:0"
@@ -30893,9 +30798,7 @@
                 "modifierName": {
                   "id": 413,
                   "name": "ifModelExists",
-                  "nameLocations": [
-                    "4281:13:0"
-                  ],
+                  "nameLocations": ["4281:13:0"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 179,
                   "src": "4281:13:0"
@@ -30966,9 +30869,7 @@
                     "pathNode": {
                       "id": 416,
                       "name": "ModelData",
-                      "nameLocations": [
-                        "4313:9:0"
-                      ],
+                      "nameLocations": ["4313:9:0"],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 110,
                       "src": "4313:9:0"
@@ -30992,18 +30893,14 @@
             "visibility": "external"
           },
           {
-            "baseFunctions": [
-              1149
-            ],
+            "baseFunctions": [1149],
             "body": {
               "id": 456,
               "nodeType": "Block",
               "src": "4525:106:0",
               "statements": [
                 {
-                  "assignments": [
-                    444
-                  ],
+                  "assignments": [444],
                   "declarations": [
                     {
                       "constant": false,
@@ -31026,9 +30923,7 @@
                         "pathNode": {
                           "id": 442,
                           "name": "ModelData",
-                          "nameLocations": [
-                            "4535:9:0"
-                          ],
+                          "nameLocations": ["4535:9:0"],
                           "nodeType": "IdentifierPath",
                           "referencedDeclaration": 110,
                           "src": "4535:9:0"
@@ -31205,9 +31100,7 @@
                 "modifierName": {
                   "id": 436,
                   "name": "ifModelExists",
-                  "nameLocations": [
-                    "4484:13:0"
-                  ],
+                  "nameLocations": ["4484:13:0"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 179,
                   "src": "4484:13:0"
@@ -31412,10 +31305,7 @@
                       "id": 474,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "4803:7:0",
                       "typeDescriptions": {
@@ -31523,10 +31413,7 @@
                       "id": 482,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "4867:7:0",
                       "typeDescriptions": {
@@ -31696,9 +31583,7 @@
                   "src": "4979:22:0"
                 },
                 {
-                  "assignments": [
-                    503
-                  ],
+                  "assignments": [503],
                   "declarations": [
                     {
                       "constant": false,
@@ -31721,9 +31606,7 @@
                         "pathNode": {
                           "id": 501,
                           "name": "ModelData",
-                          "nameLocations": [
-                            "5011:9:0"
-                          ],
+                          "nameLocations": ["5011:9:0"],
                           "nodeType": "IdentifierPath",
                           "referencedDeclaration": 110,
                           "src": "5011:9:0"
@@ -32192,9 +32075,7 @@
                 "modifierName": {
                   "id": 471,
                   "name": "onlyOwner",
-                  "nameLocations": [
-                    "4783:9:0"
-                  ],
+                  "nameLocations": ["4783:9:0"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 56,
                   "src": "4783:9:0"
@@ -32474,10 +32355,7 @@
                       "id": 566,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "5499:7:0",
                       "typeDescriptions": {
@@ -32506,9 +32384,7 @@
                   "src": "5499:65:0"
                 },
                 {
-                  "assignments": [
-                    575
-                  ],
+                  "assignments": [575],
                   "declarations": [
                     {
                       "constant": false,
@@ -32531,9 +32407,7 @@
                         "pathNode": {
                           "id": 573,
                           "name": "ModelData",
-                          "nameLocations": [
-                            "5574:9:0"
-                          ],
+                          "nameLocations": ["5574:9:0"],
                           "nodeType": "IdentifierPath",
                           "referencedDeclaration": 110,
                           "src": "5574:9:0"
@@ -32897,9 +32771,7 @@
                 "modifierName": {
                   "id": 560,
                   "name": "onlyOwner",
-                  "nameLocations": [
-                    "5456:9:0"
-                  ],
+                  "nameLocations": ["5456:9:0"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 56,
                   "src": "5456:9:0"
@@ -32927,9 +32799,7 @@
                 "modifierName": {
                   "id": 562,
                   "name": "ifModelExists",
-                  "nameLocations": [
-                    "5466:13:0"
-                  ],
+                  "nameLocations": ["5466:13:0"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 179,
                   "src": "5466:13:0"
@@ -33124,9 +32994,7 @@
             "visibility": "external"
           },
           {
-            "baseFunctions": [
-              1156
-            ],
+            "baseFunctions": [1156],
             "body": {
               "id": 624,
               "nodeType": "Block",
@@ -33313,9 +33181,7 @@
               "src": "6184:407:0",
               "statements": [
                 {
-                  "assignments": [
-                    644
-                  ],
+                  "assignments": [644],
                   "declarations": [
                     {
                       "constant": false,
@@ -33338,9 +33204,7 @@
                         "pathNode": {
                           "id": 642,
                           "name": "ModelData",
-                          "nameLocations": [
-                            "6194:9:0"
-                          ],
+                          "nameLocations": ["6194:9:0"],
                           "nodeType": "IdentifierPath",
                           "referencedDeclaration": 110,
                           "src": "6194:9:0"
@@ -33563,10 +33427,7 @@
                       "id": 649,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "6245:7:0",
                       "typeDescriptions": {
@@ -33844,10 +33705,7 @@
                       "id": 674,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "6407:7:0",
                       "typeDescriptions": {
@@ -33876,9 +33734,7 @@
                   "src": "6407:47:0"
                 },
                 {
-                  "assignments": [
-                    683
-                  ],
+                  "assignments": [683],
                   "declarations": [
                     {
                       "constant": false,
@@ -34129,10 +33985,7 @@
                       "id": 691,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "6522:7:0",
                       "typeDescriptions": {
@@ -34186,9 +34039,7 @@
                 "modifierName": {
                   "id": 635,
                   "name": "ifModelExists",
-                  "nameLocations": [
-                    "6128:13:0"
-                  ],
+                  "nameLocations": ["6128:13:0"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 179,
                   "src": "6128:13:0"
@@ -34216,9 +34067,7 @@
                 "modifierName": {
                   "id": 638,
                   "name": "notBlacklisted",
-                  "nameLocations": [
-                    "6151:14:0"
-                  ],
+                  "nameLocations": ["6151:14:0"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 166,
                   "src": "6151:14:0"
@@ -34359,9 +34208,7 @@
             "visibility": "internal"
           },
           {
-            "baseFunctions": [
-              1140
-            ],
+            "baseFunctions": [1140],
             "body": {
               "id": 806,
               "nodeType": "Block",
@@ -34470,9 +34317,7 @@
                   "src": "6847:59:0"
                 },
                 {
-                  "assignments": [
-                    726
-                  ],
+                  "assignments": [726],
                   "declarations": [
                     {
                       "constant": false,
@@ -34495,9 +34340,7 @@
                         "pathNode": {
                           "id": 724,
                           "name": "ModelData",
-                          "nameLocations": [
-                            "6917:9:0"
-                          ],
+                          "nameLocations": ["6917:9:0"],
                           "nodeType": "IdentifierPath",
                           "referencedDeclaration": 110,
                           "src": "6917:9:0"
@@ -34554,9 +34397,7 @@
                   "src": "6917:40:0"
                 },
                 {
-                  "assignments": [
-                    732
-                  ],
+                  "assignments": [732],
                   "declarations": [
                     {
                       "constant": false,
@@ -34739,9 +34580,7 @@
                   "src": "6997:85:0"
                 },
                 {
-                  "assignments": [
-                    745
-                  ],
+                  "assignments": [745],
                   "declarations": [
                     {
                       "constant": false,
@@ -34764,9 +34603,7 @@
                         "pathNode": {
                           "id": 743,
                           "name": "AICallbackRequestData",
-                          "nameLocations": [
-                            "7181:21:0"
-                          ],
+                          "nameLocations": ["7181:21:0"],
                           "nodeType": "IdentifierPath",
                           "referencedDeclaration": 88,
                           "src": "7181:21:0"
@@ -35633,9 +35470,7 @@
               "src": "7804:235:0",
               "statements": [
                 {
-                  "assignments": [
-                    817
-                  ],
+                  "assignments": [817],
                   "declarations": [
                     {
                       "constant": false,
@@ -35658,9 +35493,7 @@
                         "pathNode": {
                           "id": 815,
                           "name": "ModelData",
-                          "nameLocations": [
-                            "7814:9:0"
-                          ],
+                          "nameLocations": ["7814:9:0"],
                           "nodeType": "IdentifierPath",
                           "referencedDeclaration": 110,
                           "src": "7814:9:0"
@@ -35812,10 +35645,7 @@
                       "id": 822,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "7865:7:0",
                       "typeDescriptions": {
@@ -36080,9 +35910,7 @@
                 "modifierName": {
                   "id": 811,
                   "name": "ifModelExists",
-                  "nameLocations": [
-                    "7781:13:0"
-                  ],
+                  "nameLocations": ["7781:13:0"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 179,
                   "src": "7781:13:0"
@@ -36147,9 +35975,7 @@
               "src": "8195:945:0",
               "statements": [
                 {
-                  "assignments": [
-                    854
-                  ],
+                  "assignments": [854],
                   "declarations": [
                     {
                       "constant": false,
@@ -36172,9 +35998,7 @@
                         "pathNode": {
                           "id": 852,
                           "name": "AICallbackRequestData",
-                          "nameLocations": [
-                            "8242:21:0"
-                          ],
+                          "nameLocations": ["8242:21:0"],
                           "nodeType": "IdentifierPath",
                           "referencedDeclaration": 88,
                           "src": "8242:21:0"
@@ -36231,9 +36055,7 @@
                   "src": "8242:59:0"
                 },
                 {
-                  "assignments": [
-                    860
-                  ],
+                  "assignments": [860],
                   "declarations": [
                     {
                       "constant": false,
@@ -36446,10 +36268,7 @@
                       "id": 867,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "8411:7:0",
                       "typeDescriptions": {
@@ -36594,9 +36413,7 @@
                     "src": "8541:457:0",
                     "statements": [
                       {
-                        "assignments": [
-                          883
-                        ],
+                        "assignments": [883],
                         "declarations": [
                           {
                             "constant": false,
@@ -36794,10 +36611,7 @@
                         "src": "8555:122:0"
                       },
                       {
-                        "assignments": [
-                          896,
-                          898
-                        ],
+                        "assignments": [896, 898],
                         "declarations": [
                           {
                             "constant": false,
@@ -36931,9 +36745,7 @@
                             "isLValue": false,
                             "isPure": false,
                             "lValueRequested": false,
-                            "names": [
-                              "gas"
-                            ],
+                            "names": ["gas"],
                             "nodeType": "FunctionCallOptions",
                             "options": [
                               {
@@ -37036,10 +36848,7 @@
                             "id": 908,
                             "name": "require",
                             "nodeType": "Identifier",
-                            "overloadedDeclarations": [
-                              4294967278,
-                              4294967278
-                            ],
+                            "overloadedDeclarations": [4294967278, 4294967278],
                             "referencedDeclaration": 4294967278,
                             "src": "8802:7:0",
                             "typeDescriptions": {
@@ -37434,9 +37243,7 @@
               "src": "9291:936:0",
               "statements": [
                 {
-                  "assignments": [
-                    945
-                  ],
+                  "assignments": [945],
                   "declarations": [
                     {
                       "constant": false,
@@ -37459,9 +37266,7 @@
                         "pathNode": {
                           "id": 943,
                           "name": "AICallbackRequestData",
-                          "nameLocations": [
-                            "9338:21:0"
-                          ],
+                          "nameLocations": ["9338:21:0"],
                           "nodeType": "IdentifierPath",
                           "referencedDeclaration": 88,
                           "src": "9338:21:0"
@@ -37739,9 +37544,7 @@
                     "src": "9595:457:0",
                     "statements": [
                       {
-                        "assignments": [
-                          965
-                        ],
+                        "assignments": [965],
                         "declarations": [
                           {
                             "constant": false,
@@ -37939,10 +37742,7 @@
                         "src": "9609:122:0"
                       },
                       {
-                        "assignments": [
-                          978,
-                          980
-                        ],
+                        "assignments": [978, 980],
                         "declarations": [
                           {
                             "constant": false,
@@ -38076,9 +37876,7 @@
                             "isLValue": false,
                             "isPure": false,
                             "lValueRequested": false,
-                            "names": [
-                              "gas"
-                            ],
+                            "names": ["gas"],
                             "nodeType": "FunctionCallOptions",
                             "options": [
                               {
@@ -38181,10 +37979,7 @@
                             "id": 990,
                             "name": "require",
                             "nodeType": "Identifier",
-                            "overloadedDeclarations": [
-                              4294967278,
-                              4294967278
-                            ],
+                            "overloadedDeclarations": [4294967278, 4294967278],
                             "referencedDeclaration": 4294967278,
                             "src": "9856:7:0",
                             "typeDescriptions": {
@@ -38587,9 +38382,7 @@
                 "modifierName": {
                   "id": 940,
                   "name": "onlyServer",
-                  "nameLocations": [
-                    "9280:10:0"
-                  ],
+                  "nameLocations": ["9280:10:0"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 69,
                   "src": "9280:10:0"
@@ -38678,10 +38471,7 @@
         "scope": 1023,
         "src": "150:10079:0",
         "usedErrors": [],
-        "usedEvents": [
-          1115,
-          1124
-        ]
+        "usedEvents": [1115, 1124]
       }
     ],
     "src": "54:10176:0"
