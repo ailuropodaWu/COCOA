@@ -135,7 +135,7 @@ async function transfer(fromNet, fromAddr, toNet, toAddr, amount){
     while(attestationResponse.status != 'complete') {
         const response = await fetch(`https://iris-api-sandbox.circle.com/v1/attestations/${messageHash}`);
         attestationResponse = await response.json()
-        await new Promise(r => setTimeout(r, TO));
+        await new Promise(r => setTimeout(r, 10000));
     }
 
     const attestationSignature = attestationResponse.attestation;
