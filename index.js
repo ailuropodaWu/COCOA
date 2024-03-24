@@ -3,6 +3,7 @@ const { Web3 } = require('web3')
 const ethers = require('ethers');
 const concat = require('concat-stream');
 const network = require('./network.json')
+const netlist = ['sepolia', 'avalanche', 'op', 'base']
 const web3 = new Web3(process.env.FROM_TESTNET_RPC);
 const oaocabi = require("./build/contracts/OAOCircle.json")["abi"]
 const tokenMessengerAbi = require('./abis/cctp/TokenMessenger.json');
@@ -10,12 +11,14 @@ const usdcAbi = require('./abis/Usdc.json');
 const messageTransmitterAbi = require('./abis/cctp/MessageTransmitter.json');
 
 
-const SENDER = web3.eth.accounts.privateKeyToAccount(process.env.DEFAULT_PRIVATE_KEY);
+
+const SENDER = web3.eth.accounts.privateKeyToAccount(process.env.FROM_PRIVATE_KEY);
 web3.eth.accounts.wallet.add(SENDER);
 const OAOC_ADDRESS = "0xf59eBE57B47c51f8583264be7e21692fCB211AB4"; // OAOCircle
 // const OAOC_ADDRESS = "0x64BF816c3b90861a489A8eDf3FEA277cE1Fa0E82" // Prompt
 const OAOCircle = new web3.eth.Contract(oaocabi, OAOC_ADDRESS, {from: SENDER.address});
-const TO = 1000000 // Due to LLama inference
+const TO = 3600 * 1000 // Due to LLama inference
+const MSG_VALUE = 0.07
 
 async function waitForTransaction(web3, txHash) {
     let transactionReceipt = await web3.eth.getTransactionReceipt(txHash);
@@ -27,28 +30,55 @@ async function waitForTransaction(web3, txHash) {
 }
 
 async function parseResult(row_data) {
-    data = row_data.replaceAll('\n', ' ')
-    data = data.split(' ')
-    return data
+    datas = []
+    for (var question = 1; question <= 5; question++){
+        start_idx = row_data.indexOf(`${question}.`) + 2
+        end_idx = (question == 5) ? -1 : row_data.indexOf(`${question+1}.`)
+        data = row_data.slice(start_idx, end_idx).replace('\n', '').split(' ')
+        if (question == 1 || question == 3){
+            // console.log(`${data}\n`)
+            const found = data.find((element) => netlist.includes(element.toLowerCase()))
+            // console.log(found)
+            if (found) {
+                data = found.toLowerCase()
+            }
+            else{
+                data = 'sepolia'
+            }
+        }
+        else{
+            data = data[1]
+        }
+        datas.push(data)
+    }
+    console.log(`parse:\n${datas}`)
+
+	return datas
 }
 
 async function oao(_instruction) {
-    const condition = "1. from which network 2. to which network 3. from which address 4. to which address 5. amount. answer the questions about the transaction in only 5 words answer! ";
+    const condition =   "1. from which network\n" +  
+                        "2. from which address\n" +
+                        "3. to which network\n" + 
+                        "4. to which address\n" +
+                        "5. transaction amount\n" + 
+                        "Answer about the transaction detail.\n" +
+                        "Give me totaly only five words answer!\n";
     // condition = ""
     var prompt = condition.concat(_instruction)
-    console.log(`prompt: ${prompt}`)
-    const tx = await OAOCircle.methods.calculateAIResult(prompt).send({value: web3.utils.toWei("0.2", "ether")})
+    console.log(`prompt:\n${prompt}`)
+    const tx = await OAOCircle.methods.calculateAIResult(prompt).send({value: web3.utils.toWei(`${MSG_VALUE}`, "ether")})
     const receipt = await waitForTransaction(web3, tx.transactionHash)
     console.log(receipt)
     const result = await OAOCircle.methods.getAIResult(prompt).call()
     console.log(`result:\n${result}`)
-    return parseResult(result.toString)
+    return await parseResult(result)
 }
 
-async function transfer(fromNet, toNet, fromAddr, toAddr, amount){
-    fromNetRPC = network[fromNet.toLower()]['rpcURL']
-    toNetRPC = network[toNet.toLower()]['rpcURL']
-    const to_DOMAIN = network[toNet.toLower()]['domain']
+async function transfer(fromNet, fromAddr, toNet, toAddr, amount){
+    fromNetRPC = network[fromNet.toLowerCase()]['rpcURL']
+    toNetRPC = network[toNet.toLowerCase()]['rpcURL']
+    const to_DOMAIN = network[toNet.toLowerCase()]['domain']
     const web3 = new Web3(fromNetRPC);
     
     // Add ETH private key used for signing transactions
@@ -69,7 +99,7 @@ async function transfer(fromNet, toNet, fromAddr, toAddr, amount){
     const toMessageTransmitterContract = new web3.eth.Contract(messageTransmitterAbi, to_MESSAGE_TRANSMITTER_CONTRACT_ADDRESS, {from: toAddr});
 
     // OP destination address
-    const toAddr = process.env.RECIPIENT_ADDRESS;
+    // const toAddr = process.env.RECIPIENT_ADDRESS;
     // const destinationAddressInBytes32 = await ethMessageContract.methods.addressToBytes32(toAddr).call();
     const abiCoder = new ethers.AbiCoder();
     const destinationAddressInBytes32 = abiCoder.encode(
@@ -90,15 +120,15 @@ async function transfer(fromNet, toNet, fromAddr, toAddr, amount){
     const burnTxReceipt = await waitForTransaction(web3, burnTx.transactionHash);
     console.log('BurnTxReceipt: ', burnTxReceipt)
 
-	// STEP 3: Retrieve message bytes from logs
-	const transactionReceipt = await web3.eth.getTransactionReceipt(burnTx.transactionHash);
-	const eventTopic = web3.utils.keccak256('MessageSent(bytes)')
-	const log = transactionReceipt.logs.find((l) => l.topics[0] === eventTopic)
-	const messageBytes = web3.eth.abi.decodeParameters(['bytes'], log.data)[0]
-	const messageHash = web3.utils.keccak256(messageBytes);
+    // STEP 3: Retrieve message bytes from logs
+    const transactionReceipt = await web3.eth.getTransactionReceipt(burnTx.transactionHash);
+    const eventTopic = web3.utils.keccak256('MessageSent(bytes)')
+    const log = transactionReceipt.logs.find((l) => l.topics[0] === eventTopic)
+    const messageBytes = web3.eth.abi.decodeParameters(['bytes'], log.data)[0]
+    const messageHash = web3.utils.keccak256(messageBytes);
 
-	console.log(`MessageBytes: ${messageBytes}`)
-	console.log(`MessageHash: ${messageHash}`)
+    console.log(`MessageBytes: ${messageBytes}`)
+    console.log(`MessageHash: ${messageHash}`)
 
     // STEP 4: Fetch attestation signature
     let attestationResponse = {status: 'pending'};
@@ -108,8 +138,8 @@ async function transfer(fromNet, toNet, fromAddr, toAddr, amount){
         await new Promise(r => setTimeout(r, TO));
     }
 
-	const attestationSignature = attestationResponse.attestation;
-	console.log(`Signature: ${attestationSignature}`)
+    const attestationSignature = attestationResponse.attestation;
+    console.log(`Signature: ${attestationSignature}`)
 
     // STEP 5: Using the message bytes and signature recieve the funds on destination chain and address
     web3.setProvider(toNetRPC); // Connect web3 to OP testnet
@@ -120,9 +150,13 @@ async function transfer(fromNet, toNet, fromAddr, toAddr, amount){
     return receiveTx.status
 };
 
-async function main() {
-    instruction = ""
-    result = oao(instruction)
-    state = transfer(result)
+async function main() {    
+    const instruction = "I want to send 1 usdc in my wallet address 0xfe44D275fA324F059c3b673577334aAaC09B706A on sepolia testnet to my avalanche testnet address 0xfe44D275fA324F059c3b673577334aAaC09B706A"
+
+    result = await oao(instruction)
+    state = await transfer.apply(this, result)
+    console.log(state)
     return state 
 }
+
+main()
