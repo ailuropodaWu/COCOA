@@ -15,7 +15,8 @@ const OAOC_ADDRESS = "0xf59eBE57B47c51f8583264be7e21692fCB211AB4"; // OAOCircle
 const OAOCircle = new web3.eth.Contract(oaocabi, OAOC_ADDRESS, {
   from: SENDER.address,
 });
-const TO = 3600 * 1000;
+const TO = 3600 * 1000; // Due to LLama inference
+const MSG_VALUE = 0.02;
 
 async function waitForTransaction(web3, txHash) {
   let transactionReceipt = await web3.eth.getTransactionReceipt(txHash);
@@ -27,15 +28,30 @@ async function waitForTransaction(web3, txHash) {
 }
 
 async function parseResult(row_data) {
-  data = [];
+  datas = [];
   for (var question = 1; question <= 5; question++) {
     start_idx = row_data.indexOf(`${question}.`) + 2;
     end_idx = question == 5 ? -1 : row_data.indexOf(`${question + 1}.`);
-    data.push(row_data.slice(start_idx, end_idx));
+    data = row_data.slice(start_idx, end_idx).replace("\n", "").split(" ");
+    if (question == 1 || question == 3) {
+      // console.log(`${data}\n`)
+      const found = data.find((element) =>
+        netlist.includes(element.toLowerCase()),
+      );
+      // console.log(found)
+      if (found) {
+        data = found.toLowerCase();
+      } else {
+        data = "sepolia";
+      }
+    } else {
+      data = data[1];
+    }
+    datas.push(data);
   }
-  console.log(`parse:\n${data}`);
+  console.log(`parse:\n${datas}`);
 
-  return data;
+  return datas;
 }
 
 async function oao(_instruction) {
@@ -52,17 +68,12 @@ async function oao(_instruction) {
   console.log(`prompt:\n${prompt}`);
   const tx = await OAOCircle.methods
     .calculateAIResult(prompt)
-    .send({ value: web3.utils.toWei("0.15", "ether") });
+    .send({ value: web3.utils.toWei(`${MSG_VALUE}`, "ether") });
   const receipt = await waitForTransaction(web3, tx.transactionHash);
   console.log(receipt);
   const result = await OAOCircle.methods.getAIResult(prompt).call();
   console.log(`result:\n${result}`);
   return await parseResult(result);
-}
-async function main() {
-  instrution =
-    "I want to send 40 usdc to the address 0xaa on op testnet using my sepolia address 0xfe44";
-  result = await oao(instrution);
 }
 
 main();

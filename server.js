@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+const lib = require('./nodejs/index')
 
 // Parse JSON bodies
 app.use(function (req, res, next) {
@@ -18,16 +19,23 @@ app.get("/prompt", (req, res) => {
   res.send("Data received successfully!");
 });
 
+
 // POST route to handle incoming data
-app.post("/prompt", (req, res) => {
-  var globalVariables = {
-    postData: req.body,
-  }; // This will contain the posted data from Angular
-  res.send(req.body);
+app.post("/api/data", async (req, res) => {
+  instruction = await req.body['prompt']
+  console.log(instruction)
+  response = await lib.oao(instruction)
+  res.send(response);
 });
 
+app.post("/api/transfer", async (req, res) => {
+    params = await req.body
+    let [status_code, hash] = await lib.transfer(params['networkFrom'], params['addressFrom'], params['networkTo'], params['addressTo'], params['amount'])
+    res.send([status_code, hash]) 
+})  
+
 // Start the server
-const PORT = 4204; // You can change the port number if needed
+const PORT = 3000; // You can change the port number if needed
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
