@@ -5,15 +5,15 @@ const concat = require("concat-stream");
 const netlist = ["sepolia", "avalanche", "op", "base"];
 const network = require("../network.json");
 const web3 = new Web3(process.env.DEFAULT_TESTNET_RPC);
-// const oaocabi = require("../build/contracts/OAOCircle.json")["abi"]; // OAOCircle
-const oaocabi = require("../build/contracts/Prompt.json")["abi"]; // Prompt
+const oaocabi = require("../build/contracts/OAOCircle.json")["abi"]; // OAOCircle
+const OAOC_ADDRESS = "0xf59eBE57B47c51f8583264be7e21692fCB211AB4"; 
+// const oaocabi = require("../build/contracts/Prompt.json")["abi"]; // Prompt
+// const OAOC_ADDRESS = "0x64BF816c3b90861a489A8eDf3FEA277cE1Fa0E82" 
 
 const SENDER = web3.eth.accounts.privateKeyToAccount(
   process.env.FROM_PRIVATE_KEY,
 );
 web3.eth.accounts.wallet.add(SENDER);
-// const OAOC_ADDRESS = "0xf59eBE57B47c51f8583264be7e21692fCB211AB4"; // OAOCircle
-const OAOC_ADDRESS = "0x64BF816c3b90861a489A8eDf3FEA277cE1Fa0E82" // Prompt
 const OAOCircle = new web3.eth.Contract(oaocabi, OAOC_ADDRESS, {
   from: SENDER.address,
 });
@@ -69,11 +69,11 @@ async function oao(_instruction) {
   var prompt = await condition.concat(_instruction);
   console.log(`prompt:\n${prompt}`);
   const tx = await OAOCircle.methods
-    .calculateAIResult([11, prompt])
+    .calculateAIResult(prompt)
     .send({ value: web3.utils.toWei(`${MSG_VALUE}`, "ether") });
   const receipt = await waitForTransaction(web3, tx.transactionHash);
   console.log(receipt);
-  const result = await OAOCircle.methods.getAIResult([11, prompt]).call();
+  const result = await OAOCircle.methods.getAIResult(prompt).call();
   console.log(`result:\n${result}`);
   return await parseResult(result);
 }
