@@ -8,9 +8,9 @@
 We aim to propose a framework that facilitates an easy process of transferring between different chains using natural language.
 
 ## Technical
-- **Extract information from sentence** <br> make a smart contract on chain to make transaction with the orlacle contract
+- **Extract information from sentence** <br> make a smart contract on chain to make transaction with the oracle [OAO](https://docs.ora.io/doc/cle/ai-oracle) from Ora
 - **Parse** <br> parse the result from oao to a specific form as parameters for next stage
-- **Auto Cross-chain transfer** <br> based on the CCTP API provided py Circle, we take parameters from last stage to autonomously do transation
+- **Auto Cross-chain transfer** <br> based on the [CCTP API](https://www.circle.com/en/cross-chain-transfer-protocol) provided py Circle, we take parameters from last stage to autonomously do transation
 
 ## Usage
 Create your own **.env**
