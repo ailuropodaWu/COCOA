@@ -9,7 +9,7 @@ We aim to propose a framework that facilitates an easy process of transferring b
 
 ## Technical
 - **Extract information from sentence** <br> make a smart contract on chain to make transaction with the oracle [OAO](https://docs.ora.io/doc/cle/ai-oracle) from Ora
-- **Parse** <br> parse the result from oao to a specific form as parameters for next stage
+- **Parse** <br> parse the result from LLaMa2 to a specific form as parameters for next stage
 - **Auto Cross-chain transfer** <br> based on the [CCTP API](https://www.circle.com/en/cross-chain-transfer-protocol) provided py Circle, we take parameters from last stage to autonomously do transation
 
 ## Usage
