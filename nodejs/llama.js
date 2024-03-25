@@ -6,9 +6,9 @@ const netlist = ["sepolia", "avalanche", "op", "base"];
 const network = require("../network.json");
 const web3 = new Web3(process.env.DEFAULT_TESTNET_RPC);
 const oaocabi = require("../build/contracts/OAOCircle.json")["abi"]; // OAOCircle
-const OAOC_ADDRESS = "0xf59eBE57B47c51f8583264be7e21692fCB211AB4"; 
+const OAOC_ADDRESS = "0xf59eBE57B47c51f8583264be7e21692fCB211AB4";
 // const oaocabi = require("../build/contracts/Prompt.json")["abi"]; // Prompt
-// const OAOC_ADDRESS = "0x64BF816c3b90861a489A8eDf3FEA277cE1Fa0E82" 
+// const OAOC_ADDRESS = "0x64BF816c3b90861a489A8eDf3FEA277cE1Fa0E82"
 
 const SENDER = web3.eth.accounts.privateKeyToAccount(
   process.env.FROM_PRIVATE_KEY,
@@ -65,7 +65,6 @@ async function oao(_instruction) {
     "5. transaction amount\n" +
     "Answer about the transaction detail.\n" +
     "Give me totaly only five words answer!\n";
-  // condition = ""
   var prompt = await condition.concat(_instruction);
   console.log(`prompt:\n${prompt}`);
   const tx = await OAOCircle.methods
@@ -78,11 +77,11 @@ async function oao(_instruction) {
   return await parseResult(result);
 }
 
-async function main() {
-  const example = "this is a test example."
-  var instruction = process.argv[2] || example
-  result = await oao(instruction)
-  console.log(result)
+async function llama() {
+  const example = "this is a test example.";
+  var instruction = process.argv[2] || example;
+  result = await oao(instruction);
+  console.log(result);
 }
-main()
-module.exports = { oao }
+llama();
+module.exports = { oao };
