@@ -132,6 +132,7 @@ async function transfer(fromNet, fromAddr, toNet, toAddr, amount) {
         receiveTx.transactionHash,
       );
       console.log("ReceiveTxReceipt: ", receiveTxReceipt);
+      console.log(receiveTx.transactionHash)
       return [receiveTx.status, receiveTx.transactionHash];
   }
   catch{

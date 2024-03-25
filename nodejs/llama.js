@@ -2,21 +2,23 @@ require("dotenv").config();
 const { Web3 } = require("web3");
 const ethers = require("ethers");
 const concat = require("concat-stream");
+const netlist = ["sepolia", "avalanche", "op", "base"];
 const network = require("../network.json");
 const web3 = new Web3(process.env.DEFAULT_TESTNET_RPC);
-const oaocabi = require("../build/contracts/OAOCircle.json")["abi"];
+// const oaocabi = require("../build/contracts/OAOCircle.json")["abi"]; // OAOCircle
+const oaocabi = require("../build/contracts/Prompt.json")["abi"]; // Prompt
 
 const SENDER = web3.eth.accounts.privateKeyToAccount(
   process.env.FROM_PRIVATE_KEY,
 );
 web3.eth.accounts.wallet.add(SENDER);
-const OAOC_ADDRESS = "0xf59eBE57B47c51f8583264be7e21692fCB211AB4"; // OAOCircle
-// const OAOC_ADDRESS = "0x64BF816c3b90861a489A8eDf3FEA277cE1Fa0E82" // Prompt
+// const OAOC_ADDRESS = "0xf59eBE57B47c51f8583264be7e21692fCB211AB4"; // OAOCircle
+const OAOC_ADDRESS = "0x64BF816c3b90861a489A8eDf3FEA277cE1Fa0E82" // Prompt
 const OAOCircle = new web3.eth.Contract(oaocabi, OAOC_ADDRESS, {
   from: SENDER.address,
 });
 const TO = 3600 * 1000; // Due to LLama inference
-const MSG_VALUE = 0.1;
+const MSG_VALUE = 0.05;
 
 async function waitForTransaction(web3, txHash) {
   let transactionReceipt = await web3.eth.getTransactionReceipt(txHash);
@@ -67,13 +69,20 @@ async function oao(_instruction) {
   var prompt = await condition.concat(_instruction);
   console.log(`prompt:\n${prompt}`);
   const tx = await OAOCircle.methods
-    .calculateAIResult(prompt)
+    .calculateAIResult([11, prompt])
     .send({ value: web3.utils.toWei(`${MSG_VALUE}`, "ether") });
   const receipt = await waitForTransaction(web3, tx.transactionHash);
   console.log(receipt);
-  const result = await OAOCircle.methods.getAIResult(prompt).call();
+  const result = await OAOCircle.methods.getAIResult([11, prompt]).call();
   console.log(`result:\n${result}`);
   return await parseResult(result);
 }
 
+async function main() {
+  const example = "this is a test example."
+  var instruction = process.argv[2] || example
+  result = await oao(instruction)
+  console.log(result)
+}
+main()
 module.exports = { oao }
