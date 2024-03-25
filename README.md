@@ -1,6 +1,7 @@
 # Crypto Oracle CrOss-chain Application
 ## *ETH Taipei 2024*
-$${\color{red}We are currently fix some FRONT-END & OAO problem}$$ 
+> [!TIP]
+> We are currently fix some FRONT-END & OAO problem
 
 ## Introduction
 
