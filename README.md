@@ -32,6 +32,6 @@ npm run testoao "this is an example instruction"
 
 Run the whole framework without UI
 ```cmd
-npm run start
+npm run start "this is an example instruction"
 ```
 Front-end is currently unavailable, we are fixing it
