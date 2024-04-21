@@ -1,5 +1,6 @@
 # *C*rypto *O*racle *C*r*O*ss-chain *A*pplication
 ## *ETH Taipei 2024*
+### *Community Finalist Prizes*
 > [!TIP]
 > We are currently fix some FRONT-END & OAO problem
 
