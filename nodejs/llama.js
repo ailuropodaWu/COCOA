@@ -2,21 +2,23 @@ require("dotenv").config();
 const { Web3 } = require("web3");
 const ethers = require("ethers");
 const concat = require("concat-stream");
-const network = require("./network.json");
-const web3 = new Web3(process.env.FROM_TESTNET_RPC);
-const oaocabi = require("./build/contracts/OAOCircle.json")["abi"];
+const netlist = ["sepolia", "avalanche", "op", "base"];
+const network = require("../network.json");
+const web3 = new Web3(process.env.DEFAULT_TESTNET_RPC);
+const oaocabi = require("../build/contracts/OAOCircle.json")["abi"]; // OAOCircle
+const OAOC_ADDRESS = "0xf59eBE57B47c51f8583264be7e21692fCB211AB4";
+// const oaocabi = require("../build/contracts/Prompt.json")["abi"]; // Prompt
+// const OAOC_ADDRESS = "0x64BF816c3b90861a489A8eDf3FEA277cE1Fa0E82"
 
 const SENDER = web3.eth.accounts.privateKeyToAccount(
-  process.env.DEFAULT_PRIVATE_KEY,
+  process.env.FROM_PRIVATE_KEY,
 );
 web3.eth.accounts.wallet.add(SENDER);
-const OAOC_ADDRESS = "0xf59eBE57B47c51f8583264be7e21692fCB211AB4"; // OAOCircle
-// const OAOC_ADDRESS = "0x64BF816c3b90861a489A8eDf3FEA277cE1Fa0E82" // Prompt
 const OAOCircle = new web3.eth.Contract(oaocabi, OAOC_ADDRESS, {
   from: SENDER.address,
 });
 const TO = 3600 * 1000; // Due to LLama inference
-const MSG_VALUE = 0.02;
+const MSG_VALUE = 0.05;
 
 async function waitForTransaction(web3, txHash) {
   let transactionReceipt = await web3.eth.getTransactionReceipt(txHash);
@@ -63,8 +65,7 @@ async function oao(_instruction) {
     "5. transaction amount\n" +
     "Answer about the transaction detail.\n" +
     "Give me totaly only five words answer!\n";
-  // condition = ""
-  var prompt = condition.concat(_instruction);
+  var prompt = await condition.concat(_instruction);
   console.log(`prompt:\n${prompt}`);
   const tx = await OAOCircle.methods
     .calculateAIResult(prompt)
@@ -76,4 +77,11 @@ async function oao(_instruction) {
   return await parseResult(result);
 }
 
-main();
+async function llama() {
+  const example = "this is a test example.";
+  var instruction = process.argv[2] || example;
+  result = await oao(instruction);
+  console.log(result);
+}
+llama();
+module.exports = { oao };

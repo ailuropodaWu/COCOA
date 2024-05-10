@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const lib = require('./nodejs/index')
+const lib = require("./index");
 
 // Parse JSON bodies
 app.use(function (req, res, next) {
@@ -19,20 +19,25 @@ app.get("/prompt", (req, res) => {
   res.send("Data received successfully!");
 });
 
-
 // POST route to handle incoming data
 app.post("/api/data", async (req, res) => {
-  instruction = await req.body['prompt']
-  console.log(instruction)
-  response = await lib.oao(instruction)
+  instruction = await req.body["prompt"];
+  console.log(instruction);
+  response = await lib.oao(instruction);
   res.send(response);
 });
 
 app.post("/api/transfer", async (req, res) => {
-    params = await req.body
-    let [status_code, hash] = await lib.transfer(params['networkFrom'], params['addressFrom'], params['networkTo'], params['addressTo'], params['amount'])
-    res.send([status_code, hash]) 
-})  
+  params = await req.body;
+  let [status_code, hash] = await lib.transfer(
+    params["networkFrom"],
+    params["addressFrom"],
+    params["networkTo"],
+    params["addressTo"],
+    params["amount"],
+  );
+  res.send([status_code, hash]);
+});
 
 // Start the server
 const PORT = 3000; // You can change the port number if needed
