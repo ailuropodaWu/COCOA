@@ -2,6 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const lib = require("./index");
+const llama = require("./nodejs/llama");
+const trade = require("./nodejs/trade");
 
 // Parse JSON bodies
 app.use(function (req, res, next) {
@@ -23,13 +25,13 @@ app.get("/prompt", (req, res) => {
 app.post("/api/data", async (req, res) => {
   instruction = await req.body["prompt"];
   console.log(instruction);
-  response = await lib.oao(instruction);
+  response = await llama.oao(instruction);
   res.send(response);
 });
 
 app.post("/api/transfer", async (req, res) => {
   params = await req.body;
-  let [status_code, hash] = await lib.transfer(
+  let [status_code, hash] = await trade.transfer(
     params["networkFrom"],
     params["addressFrom"],
     params["networkTo"],
