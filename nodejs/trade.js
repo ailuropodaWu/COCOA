@@ -22,6 +22,7 @@ async function transfer(fromNet, fromAddr, toNet, toAddr, amount) {
     toNetRPC = network[toNet.toLowerCase()]["rpcURL"];
     const to_DOMAIN = network[toNet.toLowerCase()]["domain"];
     const web3 = new Web3(fromNetRPC);
+    amount = ethers.parseEther(amount.toString())
 
     // Add ETH private key used for signing transactions
     const fromSigner = web3.eth.accounts.privateKeyToAccount(
@@ -142,4 +143,12 @@ async function transfer(fromNet, fromAddr, toNet, toAddr, amount) {
   }
 }
 
+async function main() {
+
+  [state, txHash] = await transfer('sepolia', '0xfe44D275fA324F059c3b673577334aAaC09B706A', 'avalanche', '0xfe44D275fA324F059c3b673577334aAaC09B706A', 0.1)
+  console.log(state)
+  console.log(txHash)
+}
+
+main()
 module.exports = { transfer };
