@@ -17,51 +17,63 @@ async function waitForTransaction(web3, txHash) {
 }
 
 async function transfer(fromNet, fromAddr, toNet, toAddr, amount) {
+  const fromNetRPC = network[fromNet.toLowerCase()]["rpcURL"];
+  const toNetRPC = network[toNet.toLowerCase()]["rpcURL"];
+  const to_DOMAIN = network[toNet.toLowerCase()]["domain"];
+  const web3 = new Web3(fromNetRPC);
+  amount = BigInt(web3.utils.toWei(amount.toString(), "wei"));
+
+  // Add ETH private key used for signing transactions
+  const fromSigner = web3.eth.accounts.privateKeyToAccount(
+    process.env.FROM_PRIVATE_KEY
+  );
+  web3.eth.accounts.wallet.add(fromSigner);
+  const toSigner = web3.eth.accounts.privateKeyToAccount(
+    process.env.TO_PRIVATE_KEY
+  );
+  web3.eth.accounts.wallet.add(toSigner);
+
+  // Testnet Contract Addresses
+  const from_TOKEN_MESSENGER_CONTRACT_ADDRESS =
+    network[fromNet]["tokenMessenger"];
+  const USDC_CONTRACT_ADDRESS = network[fromNet]["urcToken"];
+  const to_MESSAGE_TRANSMITTER_CONTRACT_ADDRESS =
+    network[toNet]["messageTransmitter"];
+
+  // initialize contracts using address and ABI
+  const fromTokenMessengerContract = new web3.eth.Contract(
+    tokenMessengerAbi,
+    from_TOKEN_MESSENGER_CONTRACT_ADDRESS,
+    { from: fromAddr }
+  );
+  const usdcContract = new web3.eth.Contract(usdcAbi, USDC_CONTRACT_ADDRESS, {
+    from: fromAddr,
+  });
+  const toMessageTransmitterContract = new web3.eth.Contract(
+    messageTransmitterAbi,
+    to_MESSAGE_TRANSMITTER_CONTRACT_ADDRESS,
+    { from: toAddr }
+  );
+
+  // Check USDC Balance
+  const usdcBalance = BigInt(
+    await usdcContract.methods.balanceOf(fromAddr).call()
+  );
+  if (usdcBalance < amount) {
+    console.log("current balance: ", usdcBalance);
+    console.log("amount: ", amount);
+    throw new Error("Insufficient USDC balance for transfer.");
+  }
+
+  // OP destination address
+  // const toAddr = process.env.RECIPIENT_ADDRESS;
+  // const destinationAddressInBytes32 = await ethMessageContract.methods.addressToBytes32(toAddr).call();
+  const abiCoder = new ethers.AbiCoder();
+  const destinationAddressInBytes32 = abiCoder.encode(["address"], [toAddr]);
+
+  await new Promise((r) => setTimeout(r, 10000));
+  console.log("=============== Step 1 ===============");
   try {
-    fromNetRPC = network[fromNet.toLowerCase()]["rpcURL"];
-    toNetRPC = network[toNet.toLowerCase()]["rpcURL"];
-    const to_DOMAIN = network[toNet.toLowerCase()]["domain"];
-    const web3 = new Web3(fromNetRPC);
-    amount = ethers.parseEther(amount.toString())
-
-    // Add ETH private key used for signing transactions
-    const fromSigner = web3.eth.accounts.privateKeyToAccount(
-      process.env.FROM_PRIVATE_KEY,
-    );
-    web3.eth.accounts.wallet.add(fromSigner);
-    const toSigner = web3.eth.accounts.privateKeyToAccount(
-      process.env.TO_PRIVATE_KEY,
-    );
-    web3.eth.accounts.wallet.add(toSigner);
-
-    // Testnet Contract Addresses
-    const from_TOKEN_MESSENGER_CONTRACT_ADDRESS =
-      network[fromNet]["tokenMessenger"];
-    const USDC_CONTRACT_ADDRESS = network[fromNet]["urcToken"];
-    const to_MESSAGE_TRANSMITTER_CONTRACT_ADDRESS =
-      network[toNet]["messageTransmitter"];
-
-    // initialize contracts using address and ABI
-    const fromTokenMessengerContract = new web3.eth.Contract(
-      tokenMessengerAbi,
-      from_TOKEN_MESSENGER_CONTRACT_ADDRESS,
-      { from: fromAddr },
-    );
-    const usdcContract = new web3.eth.Contract(usdcAbi, USDC_CONTRACT_ADDRESS, {
-      from: fromAddr,
-    });
-    const toMessageTransmitterContract = new web3.eth.Contract(
-      messageTransmitterAbi,
-      to_MESSAGE_TRANSMITTER_CONTRACT_ADDRESS,
-      { from: toAddr },
-    );
-
-    // OP destination address
-    // const toAddr = process.env.RECIPIENT_ADDRESS;
-    // const destinationAddressInBytes32 = await ethMessageContract.methods.addressToBytes32(toAddr).call();
-    const abiCoder = new ethers.AbiCoder();
-    const destinationAddressInBytes32 = abiCoder.encode(["address"], [toAddr]);
-
     // STEP 1: Approve messenger contract to withdraw from our active eth address
     const approveTxGas = await usdcContract.methods
       .approve(from_TOKEN_MESSENGER_CONTRACT_ADDRESS, amount)
@@ -71,17 +83,23 @@ async function transfer(fromNet, fromAddr, toNet, toAddr, amount) {
       .send({ gas: approveTxGas });
     const approveTxReceipt = await waitForTransaction(
       web3,
-      approveTx.transactionHash,
+      approveTx.transactionHash
     );
     console.log("ApproveTxReceipt: ", approveTxReceipt);
+  } catch (error) {
+    console.log(error);
+  }
 
+  await new Promise((r) => setTimeout(r, 10000));
+  console.log("=============== Step 2 ===============");
+  try {
     // STEP 2: Burn USDC
     const burnTxGas = await fromTokenMessengerContract.methods
       .depositForBurn(
         amount,
         to_DOMAIN,
         destinationAddressInBytes32,
-        USDC_CONTRACT_ADDRESS,
+        USDC_CONTRACT_ADDRESS
       )
       .estimateGas();
     const burnTx = await fromTokenMessengerContract.methods
@@ -89,18 +107,24 @@ async function transfer(fromNet, fromAddr, toNet, toAddr, amount) {
         amount,
         to_DOMAIN,
         destinationAddressInBytes32,
-        USDC_CONTRACT_ADDRESS,
+        USDC_CONTRACT_ADDRESS
       )
       .send({ gas: burnTxGas });
     const burnTxReceipt = await waitForTransaction(
       web3,
-      burnTx.transactionHash,
+      burnTx.transactionHash
     );
     console.log("BurnTxReceipt: ", burnTxReceipt);
+  } catch (error) {
+    console.log(error);
+  }
 
+  await new Promise((r) => setTimeout(r, 10000));
+  console.log("=============== Step 3 ===============");
+  try {
     // STEP 3: Retrieve message bytes from logs
     const transactionReceipt = await web3.eth.getTransactionReceipt(
-      burnTx.transactionHash,
+      burnTx.transactionHash
     );
     const eventTopic = web3.utils.keccak256("MessageSent(bytes)");
     const log = transactionReceipt.logs.find((l) => l.topics[0] === eventTopic);
@@ -109,12 +133,18 @@ async function transfer(fromNet, fromAddr, toNet, toAddr, amount) {
 
     console.log(`MessageBytes: ${messageBytes}`);
     console.log(`MessageHash: ${messageHash}`);
+  } catch (error) {
+    console.log(error);
+  }
 
+  await new Promise((r) => setTimeout(r, 10000));
+  console.log("=============== Step 4 ===============");
+  try {
     // STEP 4: Fetch attestation signature
     let attestationResponse = { status: "pending" };
     while (attestationResponse.status != "complete") {
       const response = await fetch(
-        `https://iris-api-sandbox.circle.com/v1/attestations/${messageHash}`,
+        `https://iris-api-sandbox.circle.com/v1/attestations/${messageHash}`
       );
       attestationResponse = await response.json();
       await new Promise((r) => setTimeout(r, 10000));
@@ -122,8 +152,13 @@ async function transfer(fromNet, fromAddr, toNet, toAddr, amount) {
 
     const attestationSignature = attestationResponse.attestation;
     console.log(`Signature: ${attestationSignature}`);
-
-    // STEP 5: Using the message bytes and signature recieve the funds on destination chain and address
+  } catch (error) {
+    console.log(error);
+  }
+  await new Promise((r) => setTimeout(r, 10000));
+  console.log("=============== Step 5 ===============");
+  try {
+    // STEP 5: Using the message bytes and signature receive the funds on destination chain and address
     web3.setProvider(toNetRPC); // Connect web3 to OP testnet
     const receiveTxGas = await toMessageTransmitterContract.methods
       .receiveMessage(messageBytes, attestationSignature)
@@ -133,22 +168,27 @@ async function transfer(fromNet, fromAddr, toNet, toAddr, amount) {
       .send({ gas: receiveTxGas });
     const receiveTxReceipt = await waitForTransaction(
       web3,
-      receiveTx.transactionHash,
+      receiveTx.transactionHash
     );
     console.log("ReceiveTxReceipt: ", receiveTxReceipt);
     console.log(receiveTx.transactionHash);
     return [receiveTx.status, receiveTx.transactionHash];
   } catch {
-    return ["error", 0];
+    console.log(error);
   }
 }
 
 async function main() {
-
-  [state, txHash] = await transfer('sepolia', '0xfe44D275fA324F059c3b673577334aAaC09B706A', 'avalanche', '0xfe44D275fA324F059c3b673577334aAaC09B706A', 0.1)
-  console.log(state)
-  console.log(txHash)
+  [state, txHash] = await transfer(
+    "sepolia",
+    "0x7b62a3C5A32a5A7c6744265A1012f7A1dB0a1d2F",
+    "avalanche",
+    "0x7b62a3C5A32a5A7c6744265A1012f7A1dB0a1d2F",
+    1
+  );
+  console.log(state);
+  console.log(txHash);
 }
 
-main()
+main();
 module.exports = { transfer };
