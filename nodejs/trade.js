@@ -86,13 +86,10 @@ async function transfer(fromNet, fromAddr, toNet, toAddr, amount) {
       approveTx.transactionHash
     );
     console.log("ApproveTxReceipt: ", approveTxReceipt);
-  } catch (error) {
-    console.log(error);
-  }
+  
 
   await new Promise((r) => setTimeout(r, 10000));
   console.log("=============== Step 2 ===============");
-  try {
     // STEP 2: Burn USDC
     const burnTxGas = await fromTokenMessengerContract.methods
       .depositForBurn(
@@ -115,13 +112,9 @@ async function transfer(fromNet, fromAddr, toNet, toAddr, amount) {
       burnTx.transactionHash
     );
     console.log("BurnTxReceipt: ", burnTxReceipt);
-  } catch (error) {
-    console.log(error);
-  }
 
   await new Promise((r) => setTimeout(r, 10000));
   console.log("=============== Step 3 ===============");
-  try {
     // STEP 3: Retrieve message bytes from logs
     const transactionReceipt = await web3.eth.getTransactionReceipt(
       burnTx.transactionHash
@@ -133,13 +126,9 @@ async function transfer(fromNet, fromAddr, toNet, toAddr, amount) {
 
     console.log(`MessageBytes: ${messageBytes}`);
     console.log(`MessageHash: ${messageHash}`);
-  } catch (error) {
-    console.log(error);
-  }
 
   await new Promise((r) => setTimeout(r, 10000));
   console.log("=============== Step 4 ===============");
-  try {
     // STEP 4: Fetch attestation signature
     let attestationResponse = { status: "pending" };
     while (attestationResponse.status != "complete") {
@@ -152,12 +141,8 @@ async function transfer(fromNet, fromAddr, toNet, toAddr, amount) {
 
     const attestationSignature = attestationResponse.attestation;
     console.log(`Signature: ${attestationSignature}`);
-  } catch (error) {
-    console.log(error);
-  }
   await new Promise((r) => setTimeout(r, 10000));
   console.log("=============== Step 5 ===============");
-  try {
     // STEP 5: Using the message bytes and signature receive the funds on destination chain and address
     web3.setProvider(toNetRPC); // Connect web3 to OP testnet
     const receiveTxGas = await toMessageTransmitterContract.methods
@@ -173,7 +158,7 @@ async function transfer(fromNet, fromAddr, toNet, toAddr, amount) {
     console.log("ReceiveTxReceipt: ", receiveTxReceipt);
     console.log(receiveTx.transactionHash);
     return [receiveTx.status, receiveTx.transactionHash];
-  } catch {
+  } catch (error) {
     console.log(error);
   }
 }
@@ -181,9 +166,9 @@ async function transfer(fromNet, fromAddr, toNet, toAddr, amount) {
 async function main() {
   [state, txHash] = await transfer(
     "sepolia",
-    "0x7b62a3C5A32a5A7c6744265A1012f7A1dB0a1d2F",
+    "0xfe44D275fA324F059c3b673577334aAaC09B706A",
     "avalanche",
-    "0x7b62a3C5A32a5A7c6744265A1012f7A1dB0a1d2F",
+    "0xfe44D275fA324F059c3b673577334aAaC09B706A",
     1
   );
   console.log(state);
